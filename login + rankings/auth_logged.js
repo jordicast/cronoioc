@@ -128,6 +128,7 @@ function getCurrentUserData(auth) {
 
 function renderUserData(currentUser) {
     document.getElementById("userName-container").innerHTML += ` ${currentUser.userName}`
+    document.getElementById("userName").innerHTML += ` ${currentUser.userName} no es el Teu nom d'usuari?`
     //document.getElementById("creationDate").innerHTML += ` ${currentUser.dateOfCreation}`
     //document.getElementById("userEmail").innerHTML += ` ${currentUser.email}`
     //document.getElementById("userPhone").innerHTML += ` ${currentUser.phone}`

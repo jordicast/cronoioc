@@ -50,22 +50,19 @@ let user = {
 
 
 
-render();
+render();//render the captcha onload
 let sendCodeButton = document.getElementById('sendCode');
 let verifyCodeButton = document.getElementById('verifyCode');
 sendCodeButton.addEventListener('click', sendCode);
 verifyCodeButton.addEventListener('click', verifyCode);
 
-
-
-
-//render the captcha onload
+//render the captcha 
 function render() {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
     recaptchaVerifier.render();
 }
 
-
+//SETS THE USER INFO WITH THE DATA FROM THE FORM
 function setUserInfo(user) {
 
     user.email = document.getElementById('email').value;
@@ -79,32 +76,33 @@ function setUserInfo(user) {
 function sendCode() {
 
 
-    //when sendcode is clicked then we set up the user info
+    //when sendcode is clicked then we set up the user info with the data from the form
     setUserInfo(user);
     let repeatPassword = document.getElementById('repeatPassword').value;
 
     //check if the password is the same
+
+    let missatgeError = "";
+    let divMissatgeError = document.getElementById('missatgeError');
+    divMissatgeError.innerHTML = missatgeError;
+
     if (user.password != repeatPassword) {
-        alert("Password not the same");
-        return;
+        missatgeError += `<p class="registerError">Les contrasenyes no coincideixen</p>`;
     }
 
     if(userNameNotValid(user.userName)){
-        alert("El nom d'usuari no es valid, ha de tenir entre 3 i 15 caracters i no pot contenir caracters especials");
-        return;
+        missatgeError += `<p class="error">El nom d'usuari no es valid, ha de tenir entre 3 i 15 caracters i no pot contenir caracters especials</p>`;
     }
 
 
     //check if the user has entered all the fields
     if (user.email == "" || user.number == "" || user.userName == "" || user.password == "" || repeatPassword == "") {
-        alert("Sisplau empleneu tots els camps");
-        return;
+        missatgeError = `<p class="error">S'han d'omplir tots els camps</p>`;
     }
 
     //check if field strings are containing spacebars
     if (user.email.includes(" ") || user.number.includes(" ") || user.password.includes(" ") || repeatPassword.includes(" ")) {
-        alert("Els espais no son valids als camps de email, telefon i contrasenya");
-        return;
+        missatgeError += `<p class="error">Els camps de email, telèfon i paraula de pas no poden contenir espais</p>`;
     }
 
 
@@ -112,32 +110,33 @@ function sendCode() {
 
     //phone needs to start by 6 or 7 and have 9 numbers in total.
     if (phoneNotValid(user.number)) {
-        alert(user.number + ", el numero de telefon no es valid, ha de començar per 6 o 7 i tenir 9 numeros en total");
-        return;
+        missatgeError += `<p class="error">El telèfon no es valid, ha de començar per 6 o 7 i tenir 9 números en total</p>`;
     }
 
     //email needs to have @ and .com or .es or .org or .net
     if (emailNotValid(user.email)) {
-        alert("El email no es valid, ha de tenir ser com aquest: email@domini.com");
-        return;
+        missatgeError += `<p class="error">L'email no es valid, ha de tenir aquest format exemple@domini.com</p>`;
     };
     //check if the phone or email already exists in the database
     if (phoneExists(user.number)) {
-
-        alert("Telèfon o email no disponible");
-        return;
+        missatgeError += `<p class="error">Telèfon no disponible</p>`;
     };
 
     //check if email exists
     if (emailExists(user.email)) {
-        alert("Telèfon o email no disponible");
-        return;
+        missatgeError += `<p>Email no disponible</p>`;
     }
 
     //if ip exists then we search the old user uid and we set it to the user object
     if (ipExists(user.userIP)) {
         user.oldUserUID = getOldUserUID(user.userIP);
     };
+
+    //if there is an error then we show it
+    if (missatgeError != "") {
+        divMissatgeError.innerHTML = missatgeError;
+        return;
+    } 
 
     phoneAuth("+34" + user.number);
 
@@ -167,9 +166,9 @@ function phoneAuth(number) {
             //s is in lowercase
             window.confirmationResult = confirmationResult;
             window.coderesult = confirmationResult; // assign confirmationResult to coderesult variable
-            alert("Message sent");
+            alert("Missatge de verificació enviat al telèfon " + number);
         }).catch(function (error) {
-            alert(error.message);
+           console.log(error.message);
         });
 }
 
@@ -220,9 +219,9 @@ function codeverify(code, auth, database) {
                     .then(() => {
 
                         // Data saved successfully!
-                        alert("Successfully registered");
+                        alert("Usuari creat correctament amb nom d'usuari: " + userName);
                         login(auth, email, password);
-                        console.log(email, password);
+                        //console.log(email, password);
                     })
                     .catch((error) => {
 
@@ -236,11 +235,11 @@ function codeverify(code, auth, database) {
                 //const errorCode = error.code;
                 const errorMessage = error.message;
                 // ..
-                alert(errorMessage);
+                console.log(errorMessage);
             });
     }).catch(function (error) {
 
-        alert(error.message);
+        console.log(error.message);
     });
 }
 
@@ -284,13 +283,13 @@ function login(auth, emailLogin, passwordLogin) {
                 })
                 .catch((error) => {
                     // The write failed...
-                    alert(error);
+                    console.log(error);
                 });
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            alert(errorMessage);
+            console.log(errorMessage);
         });
 }
 //logout user
