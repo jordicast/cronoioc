@@ -1,0 +1,76 @@
+{
+  "emails": {
+    "0000000": "donotdelete",
+    "danidanicom": {
+      "email": true
+    }
+  },
+  "games": {
+    "000000000": "donotdelete",
+    "idusuariogame001": {
+      "checkpoint": 999,
+      "duracion": "02:00:01",
+      "fechaFin": "testF",
+      "fechaInicio": "testI",
+      "gameid": 1,
+      "userName": "Usuario",
+      "user_ip": "95.21.226.194",
+      "useruid": "idusuario"
+    },
+    "idusuariogame002": {
+      "checkpoint": 999,
+      "duracion": "01:00:21",
+      "fechaFin": "testF",
+      "fechaInicio": "testI",
+      "gameid": 2,
+      "userName": "Usuario",
+      "user_ip": "95.21.226.194",
+      "useruid": "idusurio"
+    },
+    "nuevousuariogame001": {
+      "checkpoint": 999,
+      "duracion": "01:21:01",
+      "fechaFin": "testF",
+      "fechaInicio": "testI",
+      "gameid": 1,
+      "userName": "nuevoUser",
+      "user_ip": "96.21.226.194",
+      "useruid": "nuevousuario"
+    },
+    "useridgame001": {
+      "checkpoint": 999,
+      "duracion": "01:50:01",
+      "fechaFin": "testF",
+      "fechaInicio": "testI",
+      "gameid": 1,
+      "userName": "User",
+      "user_ip": "96.21.226.194",
+      "useruid": "GNh270yPxKMKomvE947kOguk3sJ3"
+    }
+  },
+  "ips": {
+    "000000000": "donotdelete",
+    "9521226194": {
+      "ip": "95.21.226.194",
+      "user_id": "GNh270yPxKMKomvE947kOguk3sJ3"
+    }
+  },
+  "phones": {
+    "669669669": {
+      "phone": true
+    },
+    "000000000": "donotdelete"
+  },
+  "users": {
+    "GNh270yPxKMKomvE947kOguk3sJ3": {
+      "dateOfCreation": "23/3/2023, 16:34:42",
+      "email": "dani@dani.com",
+      "last_login": "2023-03-23T17:19:51.178Z",
+      "oldUserUID": "null",
+      "phone": "669669669",
+      "userName": "danitest",
+      "user_IP": "95.21.226.194"
+    },
+    "donotdelete": "donotdelete"
+  }
+}
