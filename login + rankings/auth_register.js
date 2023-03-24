@@ -85,12 +85,16 @@ function sendCode() {
     let missatgeError = "";
     let divMissatgeError = document.getElementById('missatgeError');
     divMissatgeError.innerHTML = missatgeError;
+    //check if user.password has less than 6 characters or contains spaces
+    if (passwordNotValid(user.password)) {
+        missatgeError += `<p class="error">La contrasenya no es valida, ha de tenir més de 6 caracters i no pot contenir espais</p>`;
+    }
 
     if (user.password != repeatPassword) {
         missatgeError += `<p class="registerError">Les contrasenyes no coincideixen</p>`;
     }
 
-    if(userNameNotValid(user.userName)){
+    if (userNameNotValid(user.userName)) {
         missatgeError += `<p class="error">El nom d'usuari no es valid, ha de tenir entre 3 i 15 caracters i no pot contenir caracters especials</p>`;
     }
 
@@ -136,7 +140,7 @@ function sendCode() {
     if (missatgeError != "") {
         divMissatgeError.innerHTML = missatgeError;
         return;
-    } 
+    }
 
     phoneAuth("+34" + user.number);
 
@@ -168,7 +172,7 @@ function phoneAuth(number) {
             window.coderesult = confirmationResult; // assign confirmationResult to coderesult variable
             alert("Missatge de verificació enviat al telèfon " + number);
         }).catch(function (error) {
-           console.log(error.message);
+            console.log(error.message);
         });
 }
 
@@ -402,10 +406,15 @@ function ipExists(ip) {
 
 
 //////////////////////////////////////
-//USER NAME METHODS
+//USER userNAME and password METHODS
 function userNameNotValid(userName) {
     //username must be between 3 and 15 characters and cant contain special characters but can contain spaces
     return !(/^[a-zA-Z0-9 ]{3,15}$/.test(userName));
+}
+
+function passwordNotValid(password) {
+    //password must be bigger than 6 characters and can contain special characters but cant contain spaces
+    return !(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(password));
 }
 
 
