@@ -404,8 +404,8 @@ function ipExists(ip) {
 //////////////////////////////////////
 //USER NAME METHODS
 function userNameNotValid(userName) {
-    //username must be between 3 and 15 characters and cant contain special characters
-    return !(/^[a-zA-Z0-9]{3,15}$/.test(userName));
+    //username must be between 3 and 15 characters and cant contain special characters but can contain spaces
+    return !(/^[a-zA-Z0-9 ]{3,15}$/.test(userName));
 }
 
 
