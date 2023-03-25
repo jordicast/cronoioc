@@ -72,8 +72,7 @@ if (logoutButton != null) {
 //////////////////////////////////////////
 //USER PROFILE METHODS
 
-let user_uid = window.localStorage.getItem('id');
-//retrieve user data from database to display in the user profile
+
 
 getCurrentUserData(auth);
 
@@ -92,7 +91,7 @@ function getCurrentUserData(auth) {
                 if (snapshot.exists()) {
 
                     currentUser = {
-                        user_uid: user_uid,
+                        user_uid: user.id,
                         dateOfCreation: snapshot.val().dateOfCreation.toString(),
                         email: snapshot.val().email.toString(),
                         last_login: snapshot.val().last_login.toString(),
