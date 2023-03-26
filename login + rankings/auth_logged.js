@@ -91,7 +91,7 @@ function getCurrentUserData(auth) {
                 if (snapshot.exists()) {
 
                     currentUser = {
-                        user_uid: user.id,
+                        user_uid: user.uid,
                         dateOfCreation: snapshot.val().dateOfCreation.toString(),
                         email: snapshot.val().email.toString(),
                         last_login: snapshot.val().last_login.toString(),
@@ -101,7 +101,7 @@ function getCurrentUserData(auth) {
                         user_IP: snapshot.val().user_IP.toString()
 
                     }
-
+                    
                     renderUserData(currentUser);
                     renderUserGames(currentUser);
 
@@ -227,7 +227,7 @@ function getOwnGames(user) {
     for (let game in jsonGames) {
         let gameUrl = `${firebaseConfig.databaseURL}/games/${game}/.json`;
         let gameObj = JSON.parse(httpRequest(gameUrl));
-        if (gameObj.useruid == user.user_uid || gameObj.useruid == user.oldUserUID) {
+        if (gameObj.useruid == user.user_uid ) {
             allGames.push(gameObj);
         }
 
