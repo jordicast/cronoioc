@@ -49,7 +49,7 @@ function ingresar() {
 
 
 function login(auth, emailLogin, passwordLogin) {
-
+    document.getElementById("missatgeError").innerHTML = "";
     signInWithEmailAndPassword(auth, emailLogin, passwordLogin)
         .then((userCredential) => {
             // Signed in
@@ -72,7 +72,7 @@ function login(auth, emailLogin, passwordLogin) {
                 .catch((error) => {
                     // The write failed...
                     console.log("error");
-                    alert("Error d'autenticació, sisplau revisa els camps");
+                    document.getElementById("missatgeError")= "Error d'autenticació, sisplau revisa els camps";
                 });
         })
         .catch((error) => {
