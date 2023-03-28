@@ -79,7 +79,7 @@ function login(auth, emailLogin, passwordLogin) {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorMessage);
-            alert("Error d'autenticació, sisplau revisa els camps");
+            document.getElementById("missatgeError")= "Error d'autenticació, sisplau revisa els camps";
         });
 }
 
