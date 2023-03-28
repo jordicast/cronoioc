@@ -72,14 +72,14 @@ function login(auth, emailLogin, passwordLogin) {
                 .catch((error) => {
                     // The write failed...
                     console.log("error");
-                    document.getElementById("missatgeError")= "Error d'autenticació, sisplau revisa els camps";
+                    document.getElementById("missatgeError").innerHTML= "Error d'autenticació, sisplau revisa els camps";
                 });
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorMessage);
-            document.getElementById("missatgeError")= "Error d'autenticació, sisplau revisa els camps";
+            document.getElementById("missatgeError").innerHTML= "Error d'autenticació, sisplau revisa els camps";
         });
 }
 
