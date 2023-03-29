@@ -5,14 +5,7 @@ window.onload = function () {
 	const privacitat = document.getElementById("boto3");
 	const coockies = document.getElementById("boto4");
 	const tancar = document.getElementById("tancar");
-	if (document.getElementById("descripcio") != null) {
-		const textAbout = document.getElementById("descripcio").innerText;
-	}
-
-	if (document.getElementById("titolPopUP") != null){
-	const titolPopUp = document.getElementById("titolPopUP").innerText;
-}
-
+	const textAbout = document.getElementById("descripcio").innerText;
 
 //Si es dòna clic al boto "about us" entrem a la següent funció
 about.addEventListener("click", function () {
@@ -26,17 +19,17 @@ about.addEventListener("click", function () {
 
 //Si es fa clic al boto "Avís legal" obrim la funció, d'obrir una nova finestra externa amb el contigut de baseslegals.html
 baseslegals.addEventListener("click", function () {
-	window.open("../pages/baseslegals.html", "width=700,height=700");
+	window.open("./pages/baseslegals.html", "width=700,height=700");
 });
 
 //Si es fa clic al boto "Políctica de privacitat" obrim la funció, d'obrir una nova finestra externa amb el contigut de baseslegals.html
 privacitat.addEventListener("click", function () {
-	window.open("../pages/privacitat.html", "width=700,height=700");
+	window.open("./pages/privacitat.html", "width=700,height=700");
 });
 
 //Si es fa clic al boto "Políctica de coockies" obrim la funció, d'obrir una nova finestra externa amb el contigut de baseslegals.html
 coockies.addEventListener("click", function () {
-	window.open("../pages/coockies.html", "width=700,height=700");
+	window.open("./pages/coockies.html", "width=700,height=700");
 });
 
 
