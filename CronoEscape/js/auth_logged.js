@@ -209,7 +209,7 @@ function renderUserGames(user) {
         
         rankingTable.innerHTML += `
         <tr>
-          <th>${user.userName}</th>
+          <th>${ownGames[game].userName}</th>
           <th>${ownGames[game].duracion}</th>
           <th>${ownGames[game].fechaFin}</th>
         </tr>`;;
@@ -228,7 +228,7 @@ function getOwnGames(user) {
     for (let game in jsonGames) {
         let gameUrl = `${firebaseConfig.databaseURL}/games/${game}/.json`;
         let gameObj = JSON.parse(httpRequest(gameUrl));
-        if (gameObj.useruid == user.user_uid) {
+        if (gameObj.useruid == user.user_uid || gameObj.useruid == user.oldUserUID) {
             allGames.push(gameObj);
         }
 
