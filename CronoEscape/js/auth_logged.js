@@ -197,23 +197,30 @@ function renderUserGames(user) {
     let ownGames = getOwnGames(user);
     let gamesContainer = document.getElementById("own-ranking");
     gamesContainer.innerHTML =
-        `<table id="rankingTable">
-            <tr id="valoresRanking">
-                <th>userName</th>
-                <th>duracion</th>
-                <th>fechaFin</th>
-            </tr>
-        </table>`;
+        `<table id="rankingTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Posició</th>
+                    <th scope="col">Usuari</th>
+                    <th scope="col">Temps</th>
+                </tr>
+                </thead>
+            <tbody>`;
     let rankingTable = document.getElementById("rankingTable");
     for (let game in ownGames) {
-        
+
         rankingTable.innerHTML += `
         <tr>
-          <th>${ownGames[game].userName}</th>
-          <th>${ownGames[game].duracion}</th>
-          <th>${ownGames[game].fechaFin}</th>
+            <th scope="row">${parseInt(game) + 1}</th>
+            <td>${ownGames[game].userName}</td>
+            <td>${ownGames[game].duracion}</td>
         </tr>`;;
     }
+
+    rankingTable.innerHTML +=
+        ` </tbody>
+    </table>`
+
 }
 
 
