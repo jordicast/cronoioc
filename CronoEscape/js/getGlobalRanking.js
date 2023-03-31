@@ -67,29 +67,44 @@ function renderRanking(ranking) {
   let userName;
   let duracion;
   let fechaFin;
+  let maxRanking;
+
+
+
+  //if the current page is global_ranking.html then the maxRanking is 10, if it is my_ranking.html then the maxRanking is 100
+ if(window.location.pathname=="/pages/global_ranking.html"){
+    maxRanking = 100;
+  }else{
+    maxRanking = 5;
+  }
   //games container innerHTML has a table with userName, duracion and fecha fin
   gamesContainer.innerHTML =
     `<table id="rankingTable">
       <tr id="valoresRanking">
-        <th>userName</th>
-        <th>duracion</th>
-        <th>fechaFin</th>
-        <th>medalla</th>
+        <th>Posició</th>
+        <th>Usuari</th>
+        <th>Duració</th>
+        <th>Data Finalització</th>
       </tr>
     </table>`;
   let rankingTable = document.getElementById("rankingTable");
   //renders all ranking entries in the gamesContainer div
   for (let game in ranking) {
+
+    if(game >= maxRanking){
+      return;
+    }
     userName = ranking[game].userName;
     duracion = ranking[game].duracion;
     fechaFin = ranking[game].fechaFin;
     //create an entry on the table with id "rankingTable" adding a th with the userName, duracion and fechaFin
     rankingTable.innerHTML += `
       <tr>
+        <th>${parseInt(game)+1}.</th>
         <th>${userName}</th>
         <th>${fechaFin}</th>
         <th>${duracion}</th>
-        <th>Fusta<th>
+
       </tr>`;
 
   }
