@@ -64,22 +64,25 @@ function getGlobalRanking() {
 
 function renderRanking(ranking) {
   let gamesContainer = document.getElementById("gamesContainer");
+
   let userName;
   let duracion;
-  let fechaFin;
   let maxRanking;
 
 
 
   //if the current page is global_ranking.html then the maxRanking is 10, if it is my_ranking.html then the maxRanking is 100
- if(window.location.pathname=="/pages/global_ranking.html"){
+  if (window.location.pathname == "/pages/global_ranking.html") {
     maxRanking = 100;
-  }else{
+  } else {
     maxRanking = 5;
   }
-  //games container innerHTML has a table with userName, duracion and fecha fin
-  gamesContainer.innerHTML =
-    `<table id="rankingTable" class="table table-striped">
+
+  let htmlRanking = "";
+
+  //games container innerHTML has a table with userName, duracion 
+  htmlRanking +=
+    `<table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Posició</th>
@@ -88,28 +91,30 @@ function renderRanking(ranking) {
         </tr>
       </thead>
       <tbody>`;
-  let rankingTable = document.getElementById("rankingTable");
+
+
   //renders all ranking entries in the gamesContainer div
   for (let game in ranking) {
 
-    if(game >= maxRanking){
+    if (game >= maxRanking) {
       return;
     }
     userName = ranking[game].userName;
     duracion = ranking[game].duracion;
-    fechaFin = ranking[game].fechaFin;
-    //create an entry on the table with id "rankingTable" adding a th with the userName, duracion and fechaFin
-    rankingTable.innerHTML += `
+    //create an entry on the table with id "rankingTable" adding a th with the userName, duracion 
+    htmlRanking += `
       <tr>
-        <th scope="row">${parseInt(game)+1}</th>
+        <th scope="row">${parseInt(game) + 1}</th>
         <td>${userName}</td>
         <td>${duracion}</td>
       </tr>`;
 
   }
-  rankingTable.innerHTML += 
-  ` </tbody>
+  htmlRanking +=
+    ` </tbody>
   </table>`
+
+  gamesContainer.innerHTML += htmlRanking;
 }
 
 renderRanking(getGlobalRanking());

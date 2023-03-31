@@ -18,24 +18,24 @@
   <header>
     <!-- header inner -->
     <div class="header-top">
-    <div class="header">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand">
-          <img src="img/logo_ioc.png" alt="Logo ESCAPE">
-          CronoEscape: Una aventura a contrarellotge
-        </a>
+      <div class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand">
+            <img src="img/logo_ioc.png" alt="Logo ESCAPE">
+            CronoEscape: Una aventura a contrarellotge
+          </a>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
 
-            <li class="nav-item">
-              <a class="btn nav-link" href="pages/login.html">Login</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+              <li class="nav-item">
+                <a class="btn nav-link" href="pages/login.html">Login</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
 
-      <!-- end header inner -->
+        <!-- end header inner -->
         <section class="container mt-5">
           <div class="banner_main">
 
@@ -50,7 +50,7 @@
 
                           <li> <a href="#about">Requisits</a> </li>
                           <li> <a href="#contact">Contacte</a> </li>
-                         
+
 
                         </ul>
                       </nav>
@@ -69,51 +69,16 @@
   </header>
   <!-- ranking  -->
   <div id="ranking" class="ranking">
-    <div class="container">
+    <div id ="gamesContainer" class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="titlepage">
-            <h2>Ranking</h2>
+            <h2>TOP 5 Ranking</h2>
           </div>
         </div>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Posició</th>
-              <th scope="col">Usuari</th>
-              <th scope="col">Temps</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Otto</td>
-              <td>5:32</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Johny</td>
-              <td>6:25</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Kate</td>
-              <td>7:44</td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>Jack</td>
-              <td>8:14</td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td>Barney</td>
-              <td>8:27</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
+    <a href="../pages/global_ranking.html"><button class="btn btn-primary" id="ranking">Ranking Global</button></a>
   </div>
 
   <!-- about  -->
@@ -133,8 +98,11 @@
 
             <div class="starter-template">
 
-             <iframe width="560" height="315" src="https://www.youtube.com/embed/7tSZBbMJ2uQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/7tSZBbMJ2uQ"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+
             </div>
 
           </div>
@@ -148,27 +116,27 @@
 
   <!-- contact -->
   <div id="contact" class="contact">
-  
+
     <div class="container">
-     
+
       <div class="row">
-        
+
         <div class="col-md-12">
-         
+
           <form class="contact_bg" action="https://formsubmit.co/4755c800ba09656b4587898839b0fdd5" method="POST">
             <div class="row">
               <h2>Contacte</h2>
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                <input class="contactus" placeholder="Nom"  type="text" name="nom">
+                <input class="contactus" placeholder="Nom" type="text" name="nom">
               </div>
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                 <input class="contactus" placeholder="Assumpte" type="text" name="assumpte">
               </div>
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                <input class="contactus" placeholder="Email"  type="email" name="email">
+                <input class="contactus" placeholder="Email" type="email" name="email">
               </div>
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                <textarea class="textarea" placeholder="Missatge"  type="text" name="misatge"></textarea>
+                <textarea class="textarea" placeholder="Missatge" type="text" name="misatge"></textarea>
               </div>
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <button class="send" type="submit">Enviar</button>
@@ -219,8 +187,8 @@
 
     </div>
   </footer>
+  <script src="js/getGlobalRanking.js" type="module"></script>
+</body>
 
-  </body>
 
-  
-  </html>
+</html>
