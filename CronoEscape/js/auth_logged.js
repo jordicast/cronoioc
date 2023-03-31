@@ -194,41 +194,55 @@ if (PlayButton != null) {
 
 
 function renderUserGames(user) {
-    let ownGames = getOwnGames(user);
+    let ranking = getOwnGames(user);
     
-    ownGames.sort(function (a, b) {
+    ranking.sort(function (a, b) {
         let aTime = a.duracion.split(":");
         let bTime = b.duracion.split(":");
         let aSeconds = (+aTime[0]) * 60 * 60 + (+aTime[1]) * 60 + (+aTime[2]);
         let bSeconds = (+bTime[0]) * 60 * 60 + (+bTime[1]) * 60 + (+bTime[2]);
         return aSeconds - bSeconds;
     });
-    
-    let gamesContainer = document.getElementById("own-ranking");
-    gamesContainer.innerHTML =
-        `<table id="rankingTable" class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Posició</th>
-                    <th scope="col">Usuari</th>
-                    <th scope="col">Temps</th>
-                </tr>
-                </thead>
-            <tbody>`;
-    let rankingTable = document.getElementById("rankingTable");
-    for (let game in ownGames) {
+    let gamesContainer = document.getElementById("gamesContainer");
 
-        rankingTable.innerHTML += `
+  let userName;
+  let duracion;
+
+
+  let htmlRanking = "";
+
+  //games container innerHTML has a table with userName, duracion 
+  htmlRanking +=
+    `<table class="table table-striped">
+      <thead>
         <tr>
-            <th scope="row">${parseInt(game) + 1}</th>
-            <td>${ownGames[game].userName}</td>
-            <td>${ownGames[game].duracion}</td>
-        </tr>`;;
-    }
+          <th scope="col">Posició</th>
+          <th scope="col">Usuari</th>
+          <th scope="col">Temps</th>
+        </tr>
+      </thead>
+      <tbody>`;
 
-    rankingTable.innerHTML +=
-        ` </tbody>
-    </table>`
+
+  //renders all ranking entries in the gamesContainer div
+  for (let game in ranking) {
+
+    userName = ranking[game].userName;
+    duracion = ranking[game].duracion;
+    //create an entry on the table with id "rankingTable" adding a th with the userName, duracion 
+    htmlRanking += `
+      <tr>
+        <th scope="row">${parseInt(game) + 1}</th>
+        <td>${userName}</td>
+        <td>${duracion}</td>
+      </tr>`;
+
+  }
+  htmlRanking +=
+    ` </tbody>
+  </table>`
+
+  gamesContainer.innerHTML += htmlRanking;
 
 }
 
