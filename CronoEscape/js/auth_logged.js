@@ -195,6 +195,15 @@ if (PlayButton != null) {
 
 function renderUserGames(user) {
     let ownGames = getOwnGames(user);
+    
+    ownGames.sort(function (a, b) {
+        let aTime = a.duracion.split(":");
+        let bTime = b.duracion.split(":");
+        let aSeconds = (+aTime[0]) * 60 * 60 + (+aTime[1]) * 60 + (+aTime[2]);
+        let bSeconds = (+bTime[0]) * 60 * 60 + (+bTime[1]) * 60 + (+bTime[2]);
+        return aSeconds - bSeconds;
+    });
+    
     let gamesContainer = document.getElementById("own-ranking");
     gamesContainer.innerHTML =
         `<table id="rankingTable" class="table table-striped">
