@@ -213,7 +213,6 @@ function renderUserGames(user) {
           <th>${ownGames[game].duracion}</th>
           <th>${ownGames[game].fechaFin}</th>
         </tr>`;;
-        console.log(ownGames[game])
     }
 }
 
