@@ -79,14 +79,15 @@ function renderRanking(ranking) {
   }
   //games container innerHTML has a table with userName, duracion and fecha fin
   gamesContainer.innerHTML =
-    `<table id="rankingTable">
-      <tr id="valoresRanking">
-        <th>Posició</th>
-        <th>Usuari</th>
-        <th>Duració</th>
-        <th>Data Finalització</th>
-      </tr>
-    </table>`;
+    `<table id="rankingTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Posició</th>
+          <th scope="col">Usuari</th>
+          <th scope="col">Temps</th>
+        </tr>
+      </thead>
+      <tbody>`;
   let rankingTable = document.getElementById("rankingTable");
   //renders all ranking entries in the gamesContainer div
   for (let game in ranking) {
@@ -100,15 +101,15 @@ function renderRanking(ranking) {
     //create an entry on the table with id "rankingTable" adding a th with the userName, duracion and fechaFin
     rankingTable.innerHTML += `
       <tr>
-        <th>${parseInt(game)+1}.</th>
-        <th>${userName}</th>
-        <th>${fechaFin}</th>
-        <th>${duracion}</th>
-
+        <th scope="row">${parseInt(game)+1}</th>
+        <td>${userName}</td>
+        <td>${duracion}</td>
       </tr>`;
 
   }
-
+  rankingTable.innerHTML += 
+  ` </tbody>
+  </table>`
 }
 
 renderRanking(getGlobalRanking());
