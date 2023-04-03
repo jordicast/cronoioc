@@ -102,9 +102,18 @@ function getCurrentUserData(auth) {
                         user_IP: snapshot.val().user_IP.toString()
 
                     }
+                    if (!window.location.href.includes("/joc.html")) {
+                        renderUserData(currentUser);
+                        renderUserGames(currentUser);
+                        return;
+                    }
 
-                    renderUserData(currentUser);
-                    renderUserGames(currentUser);
+
+                    searchGame(currentUser);
+
+
+
+
 
 
                 } else {
@@ -182,21 +191,39 @@ let PlayButton = document.getElementById("game-start");
 if (PlayButton != null) {
     PlayButton.addEventListener('click', (e) => {
         window.location.href = "joc.html";
-        //...TODO...
-        //funció per comprovar si l'usuari te un joc en curs
-        //si no te cap joc en curs, crear un nou joc amb checkpoint = -1 i redirigir a la pantalla de joc.
-        //si te un joc en curs, carregar el joc, carregar el game status i redirigir a la pantalla de joc.
-        console.log("carregaGame")
+
     });
 }
 
+function searchGame(currentUser) {
+    console.log("carregantJoc");
+    let ownGames = getOwnGames(currentUser);
+    //si no existeixen jocs crea un nou joc i el pushea a la bd
+    if(!ownGames.length > 0){
+        console.log("no tens jocs, creant nou joc");
+        return;
+    }
 
+    //per cada joc a ownGames mira si te checkpoint diferent de 999(no finalitzat) llavors carrega el joc
+    for(let game in ownGames){
+        if(ownGames[game].checkpoint != 999){
+            console.log("carregant joc amb checkpoint " + ownGames[game].checkpoint);
+            return;
+        }
+    //nomes arriva aqui si no hi ha cap joc amb checkpoint diferent de 999
+    console.log("no tens jocs en curs, creant nou joc");    
+        
+
+
+    }
+
+}
 
 
 
 function renderUserGames(user) {
     let ranking = getOwnGames(user);
-    
+
     ranking.sort(function (a, b) {
         let aTime = a.duracion.split(":");
         let bTime = b.duracion.split(":");
@@ -206,15 +233,15 @@ function renderUserGames(user) {
     });
     let gamesContainer = document.getElementById("gamesContainer");
 
-  let userName;
-  let duracion;
+    let userName;
+    let duracion;
 
 
-  let htmlRanking = "";
+    let htmlRanking = "";
 
-  //games container innerHTML has a table with userName, duracion 
-  htmlRanking +=
-    `<table class="table table-striped">
+    //games container innerHTML has a table with userName, duracion 
+    htmlRanking +=
+        `<table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Posició</th>
@@ -225,25 +252,25 @@ function renderUserGames(user) {
       <tbody>`;
 
 
-  //renders all ranking entries in the gamesContainer div
-  for (let game in ranking) {
+    //renders all ranking entries in the gamesContainer div
+    for (let game in ranking) {
 
-    userName = ranking[game].userName;
-    duracion = ranking[game].duracion;
-    //create an entry on the table with id "rankingTable" adding a th with the userName, duracion 
-    htmlRanking += `
+        userName = ranking[game].userName;
+        duracion = ranking[game].duracion;
+        //create an entry on the table with id "rankingTable" adding a th with the userName, duracion 
+        htmlRanking += `
       <tr>
         <th scope="row">${parseInt(game) + 1}</th>
         <td>${userName}</td>
         <td>${duracion}</td>
       </tr>`;
 
-  }
-  htmlRanking +=
-    ` </tbody>
+    }
+    htmlRanking +=
+        ` </tbody>
   </table>`
 
-  gamesContainer.innerHTML += htmlRanking;
+    gamesContainer.innerHTML += htmlRanking;
 
 }
 
