@@ -67,16 +67,15 @@ function renderRanking(ranking) {
 
   let userName;
   let duracion;
-  let maxRanking;
+  let rankingSize = 100;
 
 
 
   //if the current page is global_ranking.html then the maxRanking is 10, if it is my_ranking.html then the maxRanking is 100
-  if (window.location.pathname == "/pages/global_ranking.html") {
-    maxRanking = 100;
-  } else {
-    maxRanking = 5;
+  if (window.location.pathname == "/CronoEscape/index.html"){
+    rankingSize = 5;
   }
+  
 
   let htmlRanking = "";
 
@@ -95,10 +94,14 @@ function renderRanking(ranking) {
 
   //renders all ranking entries in the gamesContainer div
   for (let game in ranking) {
+    
 
-    if (game >= maxRanking) {
-      return;
+    if (game >= rankingSize) {
+      
+      break;
     }
+
+
     userName = ranking[game].userName;
     duracion = ranking[game].duracion;
     //create an entry on the table with id "rankingTable" adding a th with the userName, duracion 
@@ -115,6 +118,10 @@ function renderRanking(ranking) {
   </table>`
 
   gamesContainer.innerHTML += htmlRanking;
+
+
+
+
 }
 
 renderRanking(getGlobalRanking());
