@@ -67,14 +67,16 @@ function renderRanking(ranking) {
 
   let userName;
   let duracion;
-  let rankingSize = 100;
+  let rankingSize = 5;
 
 
 
   //if the current page is global_ranking.html then the maxRanking is 10, if it is my_ranking.html then the maxRanking is 100
-  if (window.location.pathname == "/CronoEscape/index.html"){
-    rankingSize = 5;
-  }
+  if (window.location.href.includes("global_ranking.html")){
+    rankingSize = 100;
+  };
+    
+  
   
 
   let htmlRanking = "";
