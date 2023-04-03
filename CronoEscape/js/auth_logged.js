@@ -181,6 +181,7 @@ function dataExists(url) {
 let PlayButton = document.getElementById("game-start");
 if (PlayButton != null) {
     PlayButton.addEventListener('click', (e) => {
+        window.location.href = "joc.html";
         //...TODO...
         //funció per comprovar si l'usuari te un joc en curs
         //si no te cap joc en curs, crear un nou joc amb checkpoint = -1 i redirigir a la pantalla de joc.
