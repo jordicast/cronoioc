@@ -178,6 +178,18 @@ function dataExists(url) {
 /////////////////////////////////////////
 //GAME METHODS
 
+let PlayButton = document.getElementById("game-start");
+if (PlayButton != null) {
+    PlayButton.addEventListener('click', (e) => {
+        //...TODO...
+        //funció per comprovar si l'usuari te un joc en curs
+        //si no te cap joc en curs, crear un nou joc amb checkpoint = -1 i redirigir a la pantalla de joc.
+        //si te un joc en curs, carregar el joc, carregar el game status i redirigir a la pantalla de joc.
+        console.log("carregaGame")
+    });
+}
+
+
 
 
 
