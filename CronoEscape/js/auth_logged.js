@@ -234,13 +234,41 @@ function searchGame(currentUser) {
 function createGame(currentUser, ownGameslength) {
     console.log("creant nou joc");
     let gameID = ownGameslength + 1;
-    let game_uid = currentUser.user_uid + gameID;
     let game = {
-        game_uid: game_uid,
+        game_uid: currentUser.user_uid + gameID,
         checkpoint: -1,
+        duracion: null,
+        fechaFin: null,
+        fechaInicio: new Date().toLocaleString(),
+        gameid: gameID,
+        userName: currentUser.userName,
+        user_ip: currentUser.user_IP,
+        useruid: currentUser.user_uid
     }
 
     console.log("enregistrant joc a la base de dades");
+    //enregistra el game
+
+    set(ref(database, 'games/' + game.game_uid), {
+        game_uid: game.game_uid,
+        checkpoint: game.checkpoint,
+        duracion: game,
+        fechaFin: game.fechaFin,
+        fechaInicio: game.fechaInicio,
+        gameid: game.gameid,
+        userName: game.userName,
+        user_ip: game.user_ip,
+        useruid: game.useruid
+    })
+
+
+
+
+
+
+    console.log("joc enregistrat a la base de dades");
+
+
 };
 
 //carrega el joc amb el checkpoint especificat, carrega les variables a utilizar en el HTML
