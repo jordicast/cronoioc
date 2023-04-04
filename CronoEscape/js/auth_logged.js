@@ -235,7 +235,7 @@ function createGame(currentUser, ownGameslength) {
     console.log("creant nou joc");
     let gameID = ownGameslength + 1;
     let game = {
-        game_uid: currentUser.user_uid + gameID,
+        game_uid: currentUser.user_uid +""+ gameID,
         checkpoint: -1,
         duracion: null,
         fechaFin: null,
