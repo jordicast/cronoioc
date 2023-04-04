@@ -276,7 +276,9 @@ function loadGame(gameID,checkPoint) {
     localStorage.setItem("checkpoint", checkPoint);
     localStorage.setItem("gameID", gameID);
     //TODO
-    console.log("carregant joc amb id: " + gameID + " i checkpoint: " + checkPoint + " al local storage");
+    if(document.getElementById("game-info-container")!=null){
+        document.getElementById("game-info-container").innerHTML += `<hr>Joc: ${gameID} <hr>checkpoint: ${checkPoint}`;
+    }
    
 }
 
