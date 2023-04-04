@@ -212,6 +212,7 @@ function searchGame(currentUser) {
     //per cada joc a ownGames mira si te checkpoint diferent de 999(finalitzat) llavors carrega el joc
     for (let game in ownGames) {
         if (ownGames[game].checkpoint != 999) {
+            console.log("game found")
             let currentCheckpoint = ownGames[game].checkpoint;
             
             loadGame(ownGames[game].gameid, currentCheckpoint);
