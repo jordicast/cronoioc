@@ -207,7 +207,7 @@ function searchGame(currentUser) {
     if (ownGames.length == 0) {
         console.log("creating first game");
         createGame(currentUser, 0);
-        loadGame(-1);
+        loadGame(1, -1);
         return;
     }
 
@@ -215,14 +215,16 @@ function searchGame(currentUser) {
     for (let game in ownGames) {
         if (ownGames[game].checkpoint != 999) {
             let currentCheckpoint = ownGames[game].checkpoint;
-            loadGame(currentCheckpoint);
+            
+            loadGame(ownGames[game].gameid, currentCheckpoint);
             return;
         }
 
     }
     //nomes arriva aqui si existeixen jocs pero no hi ha cap joc amb checkpoint diferent de 999(finalitzat)
     console.log("creating next game");
-    createGame(currentUser, ownGames.length);
+    let gameID = currentUser.user_uid + "" + (ownGames.length + 1);
+    createGame(gameID, ownGames.length);
     loadGame(-1);
 
 }
@@ -245,8 +247,7 @@ function createGame(currentUser, ownGameslength) {
     }
 
     console.log("enregistrant joc a la base de dades");
-    //enregistra el new game
-
+    //enregistra el new game a la base de dades
     set(ref(database, 'games/' + game.game_uid), {
         game_uid: game.game_uid,
         checkpoint: game.checkpoint,
@@ -270,12 +271,13 @@ function createGame(currentUser, ownGameslength) {
 };
 
 //carrega el joc amb el checkpoint especificat, carrega les variables a utilizar en el HTML
-function loadGame(checkPoint) {
+function loadGame(gameID,checkPoint) {
     
     localStorage.setItem("checkpoint", checkPoint);
+    localStorage.setItem("gameID", gameID);
     //TODO
-    
-    console.log("carregant checkpoint: " + localStorage.getItem("checkpoint") + " al localstore");
+    console.log("carregant joc amb id: " + gameID + " i checkpoint: " + checkPoint + " al local storage");
+   
 }
 
 
@@ -295,7 +297,7 @@ function renderUserGames(user) {
         let bSeconds = (+bTime[0]) * 60 * 60 + (+bTime[1]) * 60 + (+bTime[2]);
         return aSeconds - bSeconds;
     });
-    
+
     let gamesContainer = document.getElementById("gamesContainer");
 
     let userName;
