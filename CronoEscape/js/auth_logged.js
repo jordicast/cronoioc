@@ -106,7 +106,7 @@ function getCurrentUserData(auth) {
                     if (!window.location.href.includes("/joc.html")) {
                         renderUserData(currentUser);
                         renderUserGames(currentUser);
-                        return;
+                        return;                        
                     }
 
                     searchGame(currentUser);
@@ -205,8 +205,8 @@ function searchGame(currentUser) {
     let ownGames = getOwnGames(currentUser);
     //si no existeixen jocs crea un nou joc i el pushea a la bd després carrega directament el checkpoint -1(sense inicialitzar)
     if (ownGames.length == 0) {
-        console.log("no tens jocs, creant nou joc");
-        createGame(currentUser, 1);
+        console.log("creating first game");
+        createGame(currentUser, 0);
         loadGame(-1);
         return;
     }
@@ -215,15 +215,14 @@ function searchGame(currentUser) {
     for (let game in ownGames) {
         if (ownGames[game].checkpoint != 999) {
             let currentCheckpoint = ownGames[game].checkpoint;
-            console.log("carregant joc amb checkpoint " + currentCheckpoint);
             loadGame(currentCheckpoint);
             return;
         }
 
     }
     //nomes arriva aqui si existeixen jocs pero no hi ha cap joc amb checkpoint diferent de 999(finalitzat)
-    console.log("no tens jocs en curs, creant nou joc");
-    createGame(currentUser);
+    console.log("creating next game");
+    createGame(currentUser, ownGames.length);
     loadGame(-1);
 
 }
@@ -232,8 +231,7 @@ function searchGame(currentUser) {
 
 //crea un nou game amb id = currentUser.user_uid+(ownGames.length+1) i checkpoint = -1 (sense inicialitzar)
 function createGame(currentUser, ownGameslength) {
-    console.log("creant nou joc");
-    let gameID = ownGameslength + 1;
+    let gameID = parseInt(ownGameslength) + 1;
     let game = {
         game_uid: currentUser.user_uid +""+ gameID,
         checkpoint: -1,
@@ -252,7 +250,7 @@ function createGame(currentUser, ownGameslength) {
     set(ref(database, 'games/' + game.game_uid), {
         game_uid: game.game_uid,
         checkpoint: game.checkpoint,
-        duracion: game,
+        duracion: game.duracion,
         fechaFin: game.fechaFin,
         fechaInicio: game.fechaInicio,
         gameid: game.gameid,
@@ -273,8 +271,11 @@ function createGame(currentUser, ownGameslength) {
 
 //carrega el joc amb el checkpoint especificat, carrega les variables a utilizar en el HTML
 function loadGame(checkPoint) {
-    console.log("carregant joc amb checkpoint " + checkPoint);
+    
+    localStorage.setItem("checkpoint", checkPoint);
     //TODO
+    
+    console.log("carregant checkpoint: " + localStorage.getItem("checkpoint") + " al localstore");
 }
 
 
@@ -294,6 +295,7 @@ function renderUserGames(user) {
         let bSeconds = (+bTime[0]) * 60 * 60 + (+bTime[1]) * 60 + (+bTime[2]);
         return aSeconds - bSeconds;
     });
+    
     let gamesContainer = document.getElementById("gamesContainer");
 
     let userName;
