@@ -250,8 +250,8 @@ function createGame(currentUser, ownGameslength) {
     //enregistra el new game a la base de dades de games
     set(ref(database, 'games/' + game.game_uid), {
         checkpoint: game.checkpoint,
-        duracion: game.duracion,
-        fechaFin: game.fechaFin,
+        duracion: null,
+        fechaFin: null,
         fechaInicio: game.fechaInicio,
         gameid: game.gameid,
         userName: game.userName,
@@ -352,8 +352,10 @@ function getOwnGames(user) {
     //console log all of the attribute gameid of the games in the database
     for (let game in jsonGames) {
         let gameUrl = `${firebaseConfig.databaseURL}/games/${game}/.json`;
+        
         let gameObj = JSON.parse(httpRequest(gameUrl));
-        if (gameObj.useruid == user.user_uid || gameObj.useruid == user.oldUserUID) {
+        
+        if (gameObj.duracion!=null&&(gameObj.useruid == user.user_uid || gameObj.useruid == user.oldUserUID)) {
             allGames.push(gameObj);
         }
 
