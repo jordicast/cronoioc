@@ -198,26 +198,35 @@ if (PlayButton != null) {
 function searchGame(currentUser) {
     console.log("carregantJoc");
     let ownGames = getOwnGames(currentUser);
-    //si no existeixen jocs crea un nou joc i el pushea a la bd
-    if(!ownGames.length > 0){
+    //si no existeixen jocs crea un nou joc i el pushea a la bd després carrega directament el checkpoint -1(sense inicialitzar)
+    if (ownGames.length == 0) {
         console.log("no tens jocs, creant nou joc");
+        createGame(currentUser);
+        loadGame(-1);
         return;
     }
 
     //per cada joc a ownGames mira si te checkpoint diferent de 999(no finalitzat) llavors carrega el joc
-    for(let game in ownGames){
-        if(ownGames[game].checkpoint != 999){
-            console.log("carregant joc amb checkpoint " + ownGames[game].checkpoint);
+    for (let game in ownGames) {
+        if (ownGames[game].checkpoint != 999) {
+            let currentCheckpoint = ownGames[game].checkpoint;
+            console.log("carregant joc amb checkpoint " + currentCheckpoint);
+            loadGame(currentCheckpoint);
             return;
         }
-    //nomes arriva aqui si no hi ha cap joc amb checkpoint diferent de 999
-    console.log("no tens jocs en curs, creant nou joc");    
-        
+        //nomes arriva aqui si no hi ha cap joc amb checkpoint diferent de 999
+        console.log("no tens jocs en curs, creant nou joc");
 
-
+        createGame(currentUser);
+        loadGame(-1);
     }
 
 }
+
+
+
+
+
 
 
 
