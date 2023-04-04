@@ -92,7 +92,7 @@ function getCurrentUserData(auth) {
                 if (snapshot.exists()) {
 
                     currentUser = {
-                        user_uid: user_uid,
+                        user_uid: user.uid,
                         dateOfCreation: snapshot.val().dateOfCreation.toString(),
                         email: snapshot.val().email.toString(),
                         last_login: snapshot.val().last_login.toString(),
@@ -102,12 +102,12 @@ function getCurrentUserData(auth) {
                         user_IP: snapshot.val().user_IP.toString()
 
                     }
+                    //si la url no conté joc.html carrega les dades de l'usuari i els jocs, si conté joc.html carrega el joc
                     if (!window.location.href.includes("/joc.html")) {
                         renderUserData(currentUser);
                         renderUserGames(currentUser);
                         return;
                     }
-
 
                     searchGame(currentUser);
 
@@ -195,18 +195,23 @@ if (PlayButton != null) {
     });
 }
 
+
+/**funció searchGame(currentUser)
+**busca si existeixen jocs per l'usuari actual, si no existeixen crea un nou joc i el carrega, 
+**si existeixen carrega el joc amb checkpoint que no sigui 999(finalitzat), si tots els jocs estan finalitzats crea un nou joc i el carrega**/
+
 function searchGame(currentUser) {
-    console.log("carregantJoc");
+    console.log("Buscant joc");
     let ownGames = getOwnGames(currentUser);
     //si no existeixen jocs crea un nou joc i el pushea a la bd després carrega directament el checkpoint -1(sense inicialitzar)
     if (ownGames.length == 0) {
         console.log("no tens jocs, creant nou joc");
-        createGame(currentUser);
+        createGame(currentUser, 1);
         loadGame(-1);
         return;
     }
 
-    //per cada joc a ownGames mira si te checkpoint diferent de 999(no finalitzat) llavors carrega el joc
+    //per cada joc a ownGames mira si te checkpoint diferent de 999(finalitzat) llavors carrega el joc
     for (let game in ownGames) {
         if (ownGames[game].checkpoint != 999) {
             let currentCheckpoint = ownGames[game].checkpoint;
@@ -214,13 +219,34 @@ function searchGame(currentUser) {
             loadGame(currentCheckpoint);
             return;
         }
-        //nomes arriva aqui si no hi ha cap joc amb checkpoint diferent de 999
-        console.log("no tens jocs en curs, creant nou joc");
 
-        createGame(currentUser);
-        loadGame(-1);
+    }
+    //nomes arriva aqui si existeixen jocs pero no hi ha cap joc amb checkpoint diferent de 999(finalitzat)
+    console.log("no tens jocs en curs, creant nou joc");
+    createGame(currentUser);
+    loadGame(-1);
+
+}
+
+
+
+//crea un nou game amb id = currentUser.user_uid+(ownGames.length+1) i checkpoint = -1 (sense inicialitzar)
+function createGame(currentUser, ownGameslength) {
+    console.log("creant nou joc");
+    let gameID = ownGameslength + 1;
+    let game_uid = currentUser.user_uid + gameID;
+    let game = {
+        game_uid: game_uid,
+        checkpoint: -1,
     }
 
+    console.log("enregistrant joc a la base de dades");
+};
+
+//carrega el joc amb el checkpoint especificat, carrega les variables a utilizar en el HTML
+function loadGame(checkPoint) {
+    console.log("carregant joc amb checkpoint " + checkPoint);
+    //TODO
 }
 
 
