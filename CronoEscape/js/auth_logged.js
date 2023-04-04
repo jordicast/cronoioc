@@ -92,7 +92,7 @@ function getCurrentUserData(auth) {
                 if (snapshot.exists()) {
 
                     currentUser = {
-                        user_uid: user.uid,
+                        user_uid: uid,
                         dateOfCreation: snapshot.val().dateOfCreation.toString(),
                         email: snapshot.val().email.toString(),
                         last_login: snapshot.val().last_login.toString(),
@@ -138,9 +138,7 @@ function getCurrentUserData(auth) {
 function renderUserData(currentUser) {
     document.getElementById("userName-container").innerHTML += ` ${currentUser.userName}`
     document.getElementById("userName").innerHTML += ` ${currentUser.userName} no es el Teu nom d'usuari?`
-    //document.getElementById("creationDate").innerHTML += ` ${currentUser.dateOfCreation}`
-    //document.getElementById("userEmail").innerHTML += ` ${currentUser.email}`
-    //document.getElementById("userPhone").innerHTML += ` ${currentUser.phone}`
+
 
 
 }
@@ -224,8 +222,8 @@ function searchGame(currentUser) {
     //nomes arriva aqui si existeixen jocs pero no hi ha cap joc amb checkpoint diferent de 999(finalitzat)
     console.log("creating next game");
     let gameID = currentUser.user_uid + "" + (ownGames.length + 1);
-    createGame(gameID, ownGames.length);
-    loadGame(-1);
+    createGame(currentUser, ownGames.length);
+    loadGame(gameID,-1);
 
 }
 
@@ -234,8 +232,9 @@ function searchGame(currentUser) {
 //crea un nou game amb id = currentUser.user_uid+(ownGames.length+1) i checkpoint = -1 (sense inicialitzar)
 function createGame(currentUser, ownGameslength) {
     let gameID = parseInt(ownGameslength) + 1;
+    let uid = currentUser.user_uid + gameID.toString();
     let game = {
-        game_uid: currentUser.user_uid +""+ gameID,
+        game_uid: uid,
         checkpoint: -1,
         duracion: null,
         fechaFin: null,
@@ -245,11 +244,10 @@ function createGame(currentUser, ownGameslength) {
         user_ip: currentUser.user_IP,
         useruid: currentUser.user_uid
     }
-
+    
     console.log("enregistrant joc a la base de dades");
-    //enregistra el new game a la base de dades
+    //enregistra el new game a la base de dades de games
     set(ref(database, 'games/' + game.game_uid), {
-        game_uid: game.game_uid,
         checkpoint: game.checkpoint,
         duracion: game.duracion,
         fechaFin: game.fechaFin,
