@@ -247,7 +247,7 @@ function createGame(currentUser, ownGameslength) {
     }
 
     console.log("enregistrant joc a la base de dades");
-    //enregistra el game
+    //enregistra el new game
 
     set(ref(database, 'games/' + game.game_uid), {
         game_uid: game.game_uid,
