@@ -134,11 +134,12 @@ function getCurrentUserData(auth) {
 
 }
 
+//ESTA FUNCION PINTA LOS DATOS DEL USUARIO EN EL PERFIL
 
 function renderUserData(currentUser) {
     document.getElementById("userName-container").innerHTML += ` ${currentUser.userName}`
     document.getElementById("userName").innerHTML += ` ${currentUser.userName} no es el Teu nom d'usuari?`
-
+    //todo pintar ownGames(currentUser).length
 
 
 }
