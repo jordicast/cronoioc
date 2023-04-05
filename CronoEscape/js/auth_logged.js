@@ -106,7 +106,7 @@ function getCurrentUserData(auth) {
                     if (!window.location.href.includes("/joc.html")) {
                         renderUserData(currentUser);
                         renderUserGames(currentUser);
-                        return;                        
+                        return;
                     }
 
                     searchGame(currentUser);
@@ -209,11 +209,14 @@ function searchGame(currentUser) {
         loadGame(1, -1);
         return;
     }
+    
 
     //per cada joc a ownGames mira si te checkpoint diferent de 999(finalitzat) llavors carrega el joc
     for (let game in ownGames) {
         if (ownGames[game].checkpoint != 999) {
+            
             console.log("game found")
+            
             let currentCheckpoint = ownGames[game].checkpoint;
             
             loadGame(ownGames[game].gameid, currentCheckpoint);
@@ -225,7 +228,7 @@ function searchGame(currentUser) {
     console.log("creating next game");
     let gameID = currentUser.user_uid + "" + (ownGames.length + 1);
     createGame(currentUser, ownGames.length);
-    loadGame(gameID,-1);
+    loadGame(gameID, -1);
 
 }
 
@@ -235,24 +238,25 @@ function searchGame(currentUser) {
 function createGame(currentUser, ownGameslength) {
     let gameID = parseInt(ownGameslength) + 1;
     let uid = currentUser.user_uid + gameID.toString();
+
     let game = {
         game_uid: uid,
-        checkpoint: -1,
-        duracion: null,
-        fechaFin: null,
-        fechaInicio: new Date().toLocaleString(),
+        checkpoint: `${-1}`,
+        duracion: "null",
+        fechaFin: "null",
+        fechaInicio: getCurrentDate(),
         gameid: gameID,
         userName: currentUser.userName,
         user_ip: currentUser.user_IP,
         useruid: currentUser.user_uid
     }
-    
+
     console.log("enregistrant joc a la base de dades");
     //enregistra el new game a la base de dades de games
     set(ref(database, 'games/' + game.game_uid), {
         checkpoint: game.checkpoint,
-        duracion: null,
-        fechaFin: null,
+        duracion: game.duracion,
+        fechaFin: game.fechaFin,
         fechaInicio: game.fechaInicio,
         gameid: game.gameid,
         userName: game.userName,
@@ -271,15 +275,15 @@ function createGame(currentUser, ownGameslength) {
 };
 
 //carrega el joc amb el checkpoint especificat, carrega les variables a utilizar en el HTML
-function loadGame(gameID,checkPoint) {
-    
+function loadGame(gameID, checkPoint) {
+
     localStorage.setItem("checkpoint", checkPoint);
     localStorage.setItem("gameID", gameID);
     //TODO
-    if(document.getElementById("game-info-container")!=null){
+    if (document.getElementById("game-info-container") != null) {
         document.getElementById("game-info-container").innerHTML += `<hr>Joc: ${gameID} <hr>checkpoint: ${checkPoint}`;
     }
-   
+
 }
 
 
@@ -291,6 +295,19 @@ function loadGame(gameID,checkPoint) {
 
 function renderUserGames(user) {
     let ranking = getOwnGames(user);
+    //function to get ownRanking(user) entries inside ranking variable were ownRanking[i].duracion == null(no finalitzat) are removed and rendered
+    for( let i = 0; i < ranking.length; i++){ 
+                                   
+        if ( ranking[i].fechaFin == "null") { 
+            ranking.splice(i, 1); 
+            i--; 
+        }
+    }
+    
+    
+    
+    
+    //sort ranking by time   
 
     ranking.sort(function (a, b) {
         let aTime = a.duracion.split(":");
@@ -304,7 +321,6 @@ function renderUserGames(user) {
 
     let userName;
     let duracion;
-
 
     let htmlRanking = "";
 
@@ -349,20 +365,20 @@ function getOwnGames(user) {
     let url = `${firebaseConfig.databaseURL}/games/.json`;
     let response = httpRequest(url);
     let jsonGames = JSON.parse(response);
-    let allGames = [];
+    let ownGames = [];
     //console log all of the attribute gameid of the games in the database
     for (let game in jsonGames) {
         let gameUrl = `${firebaseConfig.databaseURL}/games/${game}/.json`;
-        
+
         let gameObj = JSON.parse(httpRequest(gameUrl));
-        
-        if (gameObj.duracion!=null&&(gameObj.useruid == user.user_uid || gameObj.useruid == user.oldUserUID)) {
-            allGames.push(gameObj);
+
+        if (gameObj.useruid == user.user_uid || gameObj.useruid == user.oldUserUID) {
+            ownGames.push(gameObj);
         }
 
 
     }
-    return (allGames);
+    return (ownGames);
 };
 //FIN GAME METHODS
 
@@ -371,54 +387,61 @@ function getOwnGames(user) {
 
 // Funció per obtenir la data actual.
 function getCurrentDate() {
-    const currentDate = new Date();
+    const currentDate = new Date().getTime();
     return currentDate;
-  }
-  
-  // Variable per guardar la data d'inici del joc.
-  let startDate;
-  // Variable per guardar el temps transcorregut si l'usuari surt sense finalitzar el joc.
-  let dataSensefi;
- // Variable per guardar la data de fí del joc.
-  let endDate;
-  
-  // Si l'usuari torna a jugar a un joc que ja s'havia iniciat, el seu nou "startDate" serà la variable "dataSensefi".
-  if (dataSensefi) {
+}
+
+
+/*
+   // Variable per guardar la data d'inici del joc.
+let startDate;
+// Variable per guardar el temps transcorregut si l'usuari surt sense finalitzar el joc.
+let dataSensefi;
+// Variable per guardar la data de fí del joc.
+let endDate;
+
+// Si l'usuari torna a jugar a un joc que ja s'havia iniciat, el seu nou "startDate" serà la variable "dataSensefi".
+if (dataSensefi) {
     startDate = dataSensefi;
-  } else {
+} else {
     // Quan l'usuari clica al botó "jugar", s'obté la data actual i es guarda com a "startDate".
     startDate = getCurrentDate();
-  }
-  
-  // Quan l'usuari entra a la pàgina "final.html", s'obté una nova data i es guarda com a "endDate".
-   endDate = getCurrentDate();
+}
+
+// Quan l'usuari entra a la pàgina "final.html", s'obté una nova data i es guarda com a "endDate".
+endDate = getCurrentDate();
+*/
 
 
-  
-  // Funció per calcular el temps empleat jugant.
-  function tempsTotal(startDate, endDate) {
-    const calculTemps = endDate.getTime() - startDate.getTime(); // Diferència en milisegons.
+
+// Funció per calcular el temps empleat jugant accepta 2 parametres en milisegons startDate.getTime() i endDate.getTime().
+function tempsTotal(startDate, endDate) {
+    const calculTemps = endDate - startDate; // Diferència en milisegons.
     const tempsSegons = calculTemps / 1000; // Convertim a segons.
-    return tempsSegons;
-  }
-  
-  // Funció per convertir de date a string "HH:MM:SS".
-  function dateToString(date) {
+    const hores = Math.floor(tempsSegons / 3600); // Convertim a hores.
+    const minuts = Math.floor((tempsSegons - (hores * 3600)) / 60); // Convertim a minuts.
+    const segons = Math.floor(tempsSegons - (hores * 3600) - (minuts * 60)); // Convertim a segons.
+    //retorna un string amb el temps total en format "HH:MM:SS"
+    return `${hores}:${minuts}:${segons}`;
+}
+
+// Funció per convertir de date a string "HH:MM:SS".
+function dateToString(date) {
     const hores = date.getHours();
     const minuts = date.getMinutes();
     const segons = date.getSeconds();
     return `${hores}:${minuts}:${segons}`;
-  }
-  
-  // Funció per convertir de string "HH:MM:SS" a date.
-  function stringToDate(str) {
+}
+
+// Funció per convertir de string "HH:MM:SS" a date en milisegons.
+function stringToDate(str) {
     const [hores, minuts, segons] = str.split(':');
     const date = new Date();
     date.setHours(hores);
     date.setMinutes(minuts);
     date.setSeconds(segons);
     return date;
-  }
-  
+}
+
 
 
