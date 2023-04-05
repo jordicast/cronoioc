@@ -365,3 +365,60 @@ function getOwnGames(user) {
     return (allGames);
 };
 //FIN GAME METHODS
+
+
+// CALCUL TEMPS JOC
+
+// Funció per obtenir la data actual.
+function getCurrentDate() {
+    const currentDate = new Date();
+    return currentDate;
+  }
+  
+  // Variable per guardar la data d'inici del joc.
+  let startDate;
+  // Variable per guardar el temps transcorregut si l'usuari surt sense finalitzar el joc.
+  let dataSensefi;
+ // Variable per guardar la data de fí del joc.
+  let endDate;
+  
+  // Si l'usuari torna a jugar a un joc que ja s'havia iniciat, el seu nou "startDate" serà la variable "dataSensefi".
+  if (dataSensefi) {
+    startDate = dataSensefi;
+  } else {
+    // Quan l'usuari clica al botó "jugar", s'obté la data actual i es guarda com a "startDate".
+    startDate = getCurrentDate();
+  }
+  
+  // Quan l'usuari entra a la pàgina "final.html", s'obté una nova data i es guarda com a "endDate".
+   endDate = getCurrentDate();
+
+
+  
+  // Funció per calcular el temps empleat jugant.
+  function tempsTotal(startDate, endDate) {
+    const calculTemps = endDate.getTime() - startDate.getTime(); // Diferència en milisegons.
+    const tempsSegons = calculTemps / 1000; // Convertim a segons.
+    return tempsSegons;
+  }
+  
+  // Funció per convertir de date a string "HH:MM:SS".
+  function dateToString(date) {
+    const hores = date.getHours();
+    const minuts = date.getMinutes();
+    const segons = date.getSeconds();
+    return `${hores}:${minuts}:${segons}`;
+  }
+  
+  // Funció per convertir de string "HH:MM:SS" a date.
+  function stringToDate(str) {
+    const [hores, minuts, segons] = str.split(':');
+    const date = new Date();
+    date.setHours(hores);
+    date.setMinutes(minuts);
+    date.setSeconds(segons);
+    return date;
+  }
+  
+
+
