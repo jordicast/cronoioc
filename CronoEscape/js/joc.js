@@ -7,10 +7,18 @@ import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/fi
 import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 
 
+window.onbeforeunload = function() {
+    localStorage.clear();
+    return;
+};
+
+
 if (window.localStorage.getItem('id') == null) {
     //redirect to the login.html page if the user is not logged in
     window.location.href = "login.html";
 }
+
+
 
 
 
