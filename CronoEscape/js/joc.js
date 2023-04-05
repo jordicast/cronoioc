@@ -7,10 +7,7 @@ import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/fi
 import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 
 
-window.onbeforeunload = function() {
-    localStorage.clear();
-    return;
-};
+
 
 
 if (window.localStorage.getItem('id') == null) {
@@ -37,13 +34,6 @@ const firebaseConfig = {
     measurementId: "G-QQD81WK4CE"
 };
 
-
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
-const database = getDatabase(app);
 
 
 console.log("joc.js")

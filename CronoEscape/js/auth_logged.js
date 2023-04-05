@@ -8,10 +8,6 @@ import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9
 
 
 
-window.onbeforeunload = function() {
-    localStorage.clear();
-    return;
-};
 
 
 if (window.localStorage.getItem('id') == null) {
