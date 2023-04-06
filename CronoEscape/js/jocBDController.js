@@ -34,3 +34,4 @@ const firebaseConfig = {
 
 
 console.log(localStorage.getItem('gameID'));
+console.log(localStorage.getItem('checkPoint'));
