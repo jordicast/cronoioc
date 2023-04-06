@@ -280,9 +280,8 @@ function createGame(currentUser, ownGameslength) {
 //carrega el joc amb el checkpoint especificat, carrega les variables a utilizar en el HTML
 function loadGame(gameID, checkPoint) {
 
-    localStorage.setItem("checkpoint", checkPoint);
+    localStorage.setItem("checkPoint", checkPoint);
     localStorage.setItem("gameID", gameID);
-
 
 }
 
