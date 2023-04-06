@@ -1,7 +1,7 @@
 //pre carga de imatges
 var fondo_presente_off = new Image();
 // Establece la fuente de la imagen que quieres pre-cargar
-img.src = '../img/juego1/fondo_presente_off.jpg';
+fondo_presente_off = '../img/juego1/fondo_presente_off.jpg';
 
 
 

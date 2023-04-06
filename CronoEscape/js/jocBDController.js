@@ -19,10 +19,6 @@ if (window.localStorage.getItem('id') == null) {
 
 
 
-
-
-
-
 const firebaseConfig = {
     apiKey: "AIzaSyDp_QjlZP6cah2JBQLIXKSbfKtOIUfZ4Tw",
     authDomain: "cronoescape-ioc.firebaseapp.com",
@@ -36,4 +32,5 @@ const firebaseConfig = {
 
 
 
-console.log("joc.js")
+
+console.log(localStorage.getItem('gameID'));
