@@ -209,7 +209,7 @@ function searchGame(currentUser) {
     if (ownGames.length == 0) {
         console.log("creating first game");
         createGame(currentUser, 0);
-        loadGame(1, -1);
+        loadGame(currentUser.user_uid+"1", -1);
         return;
     }
     
@@ -222,7 +222,7 @@ function searchGame(currentUser) {
             
             let currentCheckpoint = ownGames[game].checkpoint;
             
-            loadGame(ownGames[game].gameid, currentCheckpoint);
+            loadGame(currentUser.user_uid + ownGames[game].gameid, currentCheckpoint);
             return;
         }
 
