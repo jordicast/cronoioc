@@ -724,6 +724,27 @@ nav.main-menu {
   cursor: pointer;
 }
 
+
+.tablet:hover {
+  content: url('../img/juego1/on/tablet_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
+}
+
+.pc:hover {
+  content: url('../img/juego1/on/pc_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
+}
+
+.maquina:hover {
+  content: url('../img/juego1/on/maquina_on_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
+}
+
+.interruptor:hover {
+  content: url('../img/juego1/on/interruptor_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
+}
+
+.photo:hover {
+  content: url('../img/juego1/on/polaroid_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
+}
+
 .warning-message {
   display: none; /* ocultem missatge per defecte */
   text-align: center;
