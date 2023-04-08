@@ -767,5 +767,15 @@ nav.main-menu {
 }
 
 
+.hidden-image {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+
+}
+
+
 
 /*-----------------------------------------------------*/
