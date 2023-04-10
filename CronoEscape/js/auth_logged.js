@@ -105,8 +105,8 @@ function getCurrentUserData(auth) {
                         user_IP: snapshot.val().user_IP.toString()
 
                     }
-                    //si la url no conté joc.html carrega les dades de l'usuari i els jocs, si conté joc.html carrega el joc
-                    if (!window.location.href.includes("/joc.html")) {
+                    //si la url es user_profile carrega les dades de l'usuari i els jocs, si conté joc.html carrega el joc
+                    if (!window.location.href.includes("/joc.html") && !window.location.href.includes("/game_loader.html")) {
                         renderUserData(currentUser);
                         renderUserGames(currentUser);
                         return;
@@ -114,7 +114,7 @@ function getCurrentUserData(auth) {
 
                     searchGame(currentUser);
 
-
+                    
 
 
 
@@ -192,7 +192,7 @@ function dataExists(url) {
 let PlayButton = document.getElementById("game-start");
 if (PlayButton != null) {
     PlayButton.addEventListener('click', (e) => {
-        window.location.href = "joc.html";
+        window.location.href = "game_loader.html";
 
     });
 }
@@ -219,6 +219,7 @@ function searchGame(currentUser) {
         if (ownGames[game].checkpoint != 999) {
             
             console.log("game found")
+            
             
             let currentCheckpoint = ownGames[game].checkpoint;
             
@@ -277,11 +278,12 @@ function createGame(currentUser, ownGameslength) {
 
 };
 
-//carrega el joc amb el checkpoint especificat, carrega les variables a utilizar en el HTML
+//carrega el joc amb el checkpoint especificat, carrega les variables a utilizar en els jocs i re
 function loadGame(gameID, checkPoint) {
 
     localStorage.setItem("checkPoint", checkPoint);
     localStorage.setItem("gameID", gameID);
+
 
 }
 
