@@ -140,10 +140,12 @@ function getCurrentUserData(auth) {
 //ESTA FUNCION PINTA LOS DATOS DEL USUARIO EN EL PERFIL
 
 function renderUserData(currentUser) {
-    document.getElementById("userName-container").innerHTML += ` ${currentUser.userName}`
-    document.getElementById("userName").innerHTML += ` ${currentUser.userName} no es el Teu nom d'usuari?`
-    //todo pintar ownGames(currentUser).length
-
+  document.getElementById("userName-container").innerHTML += ` ${currentUser.userName}`
+   // document.getElementById("userName").innerHTML += ` ${currentUser.userName} no es el Teu nom d'usuari?`
+  document.getElementById("games-played").innerHTML += ownGames(currentUser).length;
+   // Mostrar el correo electrónico y la fecha de creación del usuario
+  document.getElementById("userEmailText").innerHTML += ` ${currentUser.email}`;
+  document.getElementById("userCreationDate").innerHTML += ` ${currentUser.dateOfCreation}`;
 
 }
 
