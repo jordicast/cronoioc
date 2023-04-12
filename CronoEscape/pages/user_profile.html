@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Profile</title>
+  <title>Perfil Usuari</title>
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -34,53 +34,47 @@
 
 
 
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
 
-  <h1>
-    <div id="userName-container">Benvingut</div>
-
-
-  </h1>
-
-  <div id="userQuestion">
-
-
-    <div id="userName"></div>
-    <button id="logout-button" class="btn btn-primary">Log-out</button>
-  </div>
-
-
-
-
-  <!--
-    <div id="creationDate">Usuari desde: </div>
-    <div id="userEmail">Email: </div>
-    <div id="userPhone">Telèfon: </div>
-    -->
-  <hr>
-
-
-
-  <button id="game-start" class="btn btn-success">Jugar</button>
-
-  <hr>Les teves partides:
-  <div id="gamesContainer">
-
-
-    <div id="own-ranking" class="container">
-      <div class="col-md-12">
-        <div class="titlepage">
-          <h2>Ranking Personal</h2>
+        <div class="card-header d-flex justify-content-between">
+          <h2>Benvingut <span id="userName-container"></span>!</h2>
+          <button id="logout-button" class="btn btn-primary ml-auto">Log-out</button>
+        </div>
+        <div class="row">
+          <div class="col-md-4 text-center">
+      
+            <img   const avatarImg = document.getElementById('avatar-img');
+            avatarImg.src = imagesPath + avatarFileName;
+             class="rounded-circle img-fluid"
+              alt="Imatge d'usuari">
+          </div>
+          <div class="col-md-8">
+            <h4 id="user-name" class="mt-2 mb-4"></h4>
+            <ul class="list-unstyled">
+              <i class="fas fa-user"></i> Usuari desde: <span id="userCreationDate"></span><br>
+              <i class="fas fa-envelope"></i> Email: <span id="userEmailText"></span><br>
+              <i class="fas fa-gamepad"></i> Has jugat a <span id="games-played"></span> partides.
+            </ul>
+          </div>
+        </div>
+        <div id="bloc-jugar" class="card-header d-flex justify-content-between" style="background-color: #5495ff;">
+          <div id="volsjugar" style="text-align: left;">Vols jugar o continuar la teva partida?</div>
+          <button id="game-start" class="btn btn-success">Jugar</button>
+        </div><br>
+        <div id="gamesContainer">
+          <div id="own-ranking" class="container">
+            <div class="col-md-12">
+              <div class="titlepage">
+                <h2>Ranking Personal</h2>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
 
 
 
@@ -121,11 +115,7 @@
   </footer>
 
   <hr>
-
-
   <script type="module" src="../js/auth_logged.js"></script>
-
-
 
 </body>
 
