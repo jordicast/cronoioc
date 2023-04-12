@@ -775,6 +775,14 @@ nav.main-menu {
   pointer-events: none;
 
 }
+/**-------------Pàgina perfil usuari ----------------- **/
+
+/** Text jugar **/
+
+#volsjugar {
+  color: white;
+  font-weight: bold;
+}
 
 
 /** ESTIL TAULA RANKING**/
