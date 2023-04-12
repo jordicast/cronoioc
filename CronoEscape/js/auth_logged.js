@@ -142,7 +142,7 @@ function getCurrentUserData(auth) {
 function renderUserData(currentUser) {
   document.getElementById("userName-container").innerHTML += ` ${currentUser.userName}`
    // document.getElementById("userName").innerHTML += ` ${currentUser.userName} no es el Teu nom d'usuari?`
-  document.getElementById("games-played").innerHTML += ownGames(currentUser).length;
+  //document.getElementById("games-played").innerHTML += ownGames(currentUser).length;
    // Mostrar el correo electrónico y la fecha de creación del usuario
   document.getElementById("userEmailText").innerHTML += ` ${currentUser.email}`;
   document.getElementById("userCreationDate").innerHTML += ` ${currentUser.dateOfCreation}`;
