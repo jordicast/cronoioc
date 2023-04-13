@@ -732,12 +732,15 @@ nav.main-menu {
 .pc:hover {
   content: url('../img/juego1/on/pc_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
 }
-
-.maquina:hover {
+#maquinaON:hover {
   content: url('../img/juego1/on/maquina_on_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
 }
 
-.interruptor:hover {
+#maquinaOFF:hover {
+  content: url('../img/juego1/on/maquina_off_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
+}
+
+#llumActivada:hover {
   content: url('../img/juego1/on/interruptor_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
 }
 
@@ -775,6 +778,18 @@ nav.main-menu {
   pointer-events: none;
 
 }
+
+.game-container{
+display:flex  !important;
+flex-direction: column !important;
+align-items: center !important;
+justify-content: center !important;
+min-height: 100vh !important;
+
+}
+
+
+
 /**-------------Pàgina perfil usuari ----------------- **/
 
 /** Text jugar **/
