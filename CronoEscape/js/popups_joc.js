@@ -77,12 +77,30 @@ function PopUpPC() {
 //Comprova resposta ordinador
 function comprovaResposta() {
   var input = document.getElementById("input_resposta");
-  if (  input.value.toLowerCase() === "triangulo" || input.value.toLowerCase() === "triangle"
-  ) {
-    // L'entrada correspon amb 'Triangulo' o 'Triangle'
-    console.log("Correcte");
+
+  let url = `https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta1/${input.value}/.json`;
+  if (  httpRequest(url) != "null" ) {
+    // L'entrada dona true
+    console.log(httpRequest(url));
   } else {
-    // L'entrada no correspon amb 'Triangulo' o 'Triangle'
-    console.log("Incorrecte");
+    // L'entrada no correspon amb 
+    console.log(httpRequest(url));
+  }
+}
+
+
+/////////////////////////////////////////
+//HTTP REQUEST METHODS
+
+
+//function to make an http request to the URL and return the response
+function httpRequest(url) {
+  var httpRequest = new XMLHttpRequest();
+  httpRequest.open('GET', url, false);
+  httpRequest.send();
+  if (httpRequest.status === 200) {
+      return httpRequest.responseText;
+  } else {
+      return null;
   }
 }
