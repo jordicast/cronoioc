@@ -76,9 +76,9 @@ function PopUpPC() {
 
 //Comprova resposta ordinador
 function comprovaResposta() {
-  var input = document.getElementById("input_resposta");
+  var input = document.getElementById("input_resposta").value;
 
-  let url = `https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta1/${input.value}/.json`;
+  let url = `https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta1/${input.toLowerCase()}/.json`;
   if (  httpRequest(url) != "null" ) {
     // L'entrada dona true
   
