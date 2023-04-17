@@ -394,27 +394,6 @@ function getCurrentDate() {
 }
 
 
-/*
-   // Variable per guardar la data d'inici del joc.
-let startDate;
-// Variable per guardar el temps transcorregut si l'usuari surt sense finalitzar el joc.
-let dataSensefi;
-// Variable per guardar la data de fí del joc.
-let endDate;
-
-// Si l'usuari torna a jugar a un joc que ja s'havia iniciat, el seu nou "startDate" serà la variable "dataSensefi".
-if (dataSensefi) {
-    startDate = dataSensefi;
-} else {
-    // Quan l'usuari clica al botó "jugar", s'obté la data actual i es guarda com a "startDate".
-    startDate = getCurrentDate();
-}
-
-// Quan l'usuari entra a la pàgina "final.html", s'obté una nova data i es guarda com a "endDate".
-endDate = getCurrentDate();
-*/
-
-
 
 // Funció per calcular el temps empleat jugant accepta 2 parametres en milisegons startDate.getTime() i endDate.getTime().
 function tempsTotal(startDate, endDate) {
