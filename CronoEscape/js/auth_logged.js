@@ -16,11 +16,6 @@ if (window.localStorage.getItem('id') == null) {
 }
 
 
-
-
-
-
-
 const firebaseConfig = {
     apiKey: "AIzaSyDp_QjlZP6cah2JBQLIXKSbfKtOIUfZ4Tw",
     authDomain: "cronoescape-ioc.firebaseapp.com",
@@ -33,25 +28,14 @@ const firebaseConfig = {
 };
 
 
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase(app);
 
-
-
-
-
-
-
-
-
 ///////////////////////////////////
 //LOGOUT METHODS
-
-
 let logoutButton = document.getElementById("logout-button");
 //logout user
 if (logoutButton != null) {
@@ -70,7 +54,6 @@ if (logoutButton != null) {
 
 //FIN LOGOUT METHODS
 //////////////////////////////////////////
-
 
 //////////////////////////////////////////
 //USER PROFILE METHODS
@@ -114,10 +97,6 @@ function getCurrentUserData(auth) {
 
                     searchGame(currentUser);
 
-                    
-
-
-
 
                 } else {
                     console.log("No data available");
@@ -126,36 +105,26 @@ function getCurrentUserData(auth) {
                 console.error(error);
             });
 
-
-
         }
-
 
     });
 
-
-
 }
 
-//Funció que dóna les dades de l'usuari logeat
-
+//ESTA FUNCION PINTA LOS DATOS DEL USUARIO EN EL PERFIL
 function renderUserData(currentUser) {
 
     document.getElementById("userName-container").innerHTML += ` ${currentUser.userName}`
-    const img = document.getElementById('userAvatar');
-    img.src = currentUser.userAvatar;
 
-    // Mostra el corre de l'usuari
+    // Mostra el correu de l'usuari
     document.getElementById("userEmailText").innerHTML += ` ${currentUser.email}`;
     // Mostra la data de creació de l'usuari
     document.getElementById("userCreationDate").innerHTML += ` ${currentUser.dateOfCreation}`;
     // Mostra el total de partides que ha realitzat l'usuari
-    const numGamesPlayed = getOwnGames(currentUser).length - 1;
+    const numGamesPlayed = getOwnGames(currentUser).length;
     document.getElementById("games-played").innerHTML += ` ${numGamesPlayed}`;
 
 }
-
-
 
 
 //FIN USER PROFILE METHODS
@@ -218,20 +187,20 @@ function searchGame(currentUser) {
     if (ownGames.length == 0) {
         console.log("creating first game");
         createGame(currentUser, 0);
-        loadGame(currentUser.user_uid+"1", -1);
+        loadGame(currentUser.user_uid + "1", -1);
         return;
     }
-    
+
 
     //per cada joc a ownGames mira si te checkpoint diferent de 999(finalitzat) llavors carrega el joc
     for (let game in ownGames) {
         if (ownGames[game].checkpoint != 999) {
-            
+
             console.log("game found")
-            
-            
+
+
             let currentCheckpoint = ownGames[game].checkpoint;
-            
+
             loadGame(currentUser.user_uid + ownGames[game].gameid, currentCheckpoint);
             return;
         }
@@ -306,22 +275,40 @@ function loadGame(gameID, checkPoint) {
 function renderUserGames(user) {
     let ranking = getOwnGames(user);
     //function to get ownRanking(user) entries inside ranking variable were ownRanking[i].duracion == null(no finalitzat) are removed and rendered
-    for( let i = 0; i < ranking.length; i++){ 
-                                   
-        if ( ranking[i].fechaFin == "null") { 
-            ranking.splice(i, 1); 
-            i--; 
+    for (let i = 0; i < ranking.length; i++) {
+
+        if (ranking[i].fechaFin == "null") {
+            ranking.splice(i, 1);
+            i--;
         }
     }
-    
-    
-    
-    
-    //sort ranking by time   
 
+
+
+
+    //sort ranking by time   
     ranking.sort(function (a, b) {
-        let aTime = a.duracion.split(":");
-        let bTime = b.duracion.split(":");
+        let aTime;
+        let bTime;
+        // Ordanem les partides 
+        if (a.duracion == undefined) {
+            aTime = new Array(3);
+            aTime[0] = 60;
+            aTime[1] = 60;
+            aTime[2] = 60;
+        } else {
+            aTime = a.duracion.split(":");
+        }
+
+        if (b.duracion == undefined) {
+            bTime = new Array(3);
+            bTime[0] = 60;
+            bTime[1] = 60;
+            bTime[2] = 60;
+        } else {
+            bTime = b.duracion.split(":");
+        }
+
         let aSeconds = (+aTime[0]) * 60 * 60 + (+aTime[1]) * 60 + (+aTime[2]);
         let bSeconds = (+bTime[0]) * 60 * 60 + (+bTime[1]) * 60 + (+bTime[2]);
         return aSeconds - bSeconds;
@@ -352,6 +339,11 @@ function renderUserGames(user) {
 
         userName = ranking[game].userName;
         duracion = ranking[game].duracion;
+        //Li diem que si la partida no ha estat acabada no imprimeixi cap temps i ens avisi
+        if (duracion == undefined) {
+            duracion = "Partida sense acabar";
+        }
+
         //create an entry on the table with id "rankingTable" adding a th with the userName, duracion 
         htmlRanking += `
       <tr>
