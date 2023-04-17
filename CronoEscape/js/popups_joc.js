@@ -65,7 +65,7 @@ function PopUpPC() {
   <div style="display:block; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fff; padding:50px;">
   <button class="btn " onclick="cerrarPopUp()" id="tancar">X</button>
     <img src="../img/juego1/on/pc_popup.png">
-    <input id="input_resposta" type="text" style="position:absolute; top: 65%; left: 50% ;background-color:transparent; border:none; font-size: 40px; color: white;
+    <input id="input_resposta" type="text" style="position:absolute; top: 65%; left: 65% ;background-color:transparent; border:none; font-size: 40px; color: white;
     transform: translate(-50%, -50%);" type="text" placeholder="Introdueix la resposta">
     <button class="btn btn-primary" style="position:absolute; top: 80%; left: 50% ; font-size: 25px;
     transform: translate(-50%, -50%);" onclick="comprovaResposta()">Comprova</button>
@@ -81,10 +81,14 @@ function comprovaResposta() {
   let url = `https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta1/${input.value}/.json`;
   if (  httpRequest(url) != "null" ) {
     // L'entrada dona true
-    console.log(httpRequest(url));
+  
+    window.location.href = "joc2.html";
+    //window.location.href = "gameLoader.html";
+  
   } else {
     // L'entrada no correspon amb 
-    console.log(httpRequest(url));
+    alert("Resposta errònia");
+    
   }
 }
 
