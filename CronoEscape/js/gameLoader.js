@@ -283,3 +283,12 @@ function redirectToGame(checkPoint) {
 
 
 }
+
+
+// CALCUL TEMPS JOC
+
+// Funció per obtenir la data actual.
+function getCurrentDate() {
+    const currentDate = new Date().getTime();
+    return currentDate;
+}
