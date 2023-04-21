@@ -82,11 +82,16 @@ function comprovaResposta() {
   if (  httpRequest(url) != "null" ) {
     // L'entrada dona true
   
-    window.location.href = "joc2.html";
+    let checkPoint = localStorage.getItem("checkPoint");
+    let gameID = localStorage.getItem("gameID");
+
+    console.log(checkPoint)
+    console.log(gameID)
+    //window.location.href = "joc2.html";
     //window.location.href = "gameLoader.html";
   
   } else {
-    // L'entrada no correspon amb 
+    // L'entrada no correspon amb la contrasnya
     alert("Resposta errònia");
     
   }

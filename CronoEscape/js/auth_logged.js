@@ -95,7 +95,7 @@ function getCurrentUserData(auth) {
                         return;
                     }
 
-                    searchGame(currentUser);
+                    
 
 
                 } else {
@@ -176,94 +176,9 @@ if (PlayButton != null) {
 }
 
 
-/**funció searchGame(currentUser)
-**busca si existeixen jocs per l'usuari actual, si no existeixen crea un nou joc i el carrega, 
-**si existeixen carrega el joc amb checkpoint que no sigui 999(finalitzat), si tots els jocs estan finalitzats crea un nou joc i el carrega**/
-
-function searchGame(currentUser) {
-    console.log("Buscant joc");
-    let ownGames = getOwnGames(currentUser);
-    //si no existeixen jocs crea un nou joc i el pushea a la bd després carrega directament el checkpoint -1(sense inicialitzar)
-    if (ownGames.length == 0) {
-        console.log("creating first game");
-        createGame(currentUser, 0);
-        loadGame(currentUser.user_uid + "1", -1);
-        return;
-    }
-
-
-    //per cada joc a ownGames mira si te checkpoint diferent de 999(finalitzat) llavors carrega el joc
-    for (let game in ownGames) {
-        if (ownGames[game].checkpoint != 999) {
-
-            console.log("game found")
-
-
-            let currentCheckpoint = ownGames[game].checkpoint;
-
-            loadGame(currentUser.user_uid + ownGames[game].gameid, currentCheckpoint);
-            return;
-        }
-
-    }
-    //nomes arriva aqui si existeixen jocs pero no hi ha cap joc amb checkpoint diferent de 999(finalitzat)
-    console.log("creating next game");
-    let gameID = currentUser.user_uid + "" + (ownGames.length + 1);
-    createGame(currentUser, ownGames.length);
-    loadGame(gameID, -1);
-
-}
 
 
 
-//crea un nou game amb id = currentUser.user_uid+(ownGames.length+1) i checkpoint = -1 (sense inicialitzar)
-function createGame(currentUser, ownGameslength) {
-    let gameID = parseInt(ownGameslength) + 1;
-    let uid = currentUser.user_uid + gameID.toString();
-
-    let game = {
-        game_uid: uid,
-        checkpoint: `${-1}`,
-        duracion: "null",
-        fechaFin: "null",
-        fechaInicio: getCurrentDate(),
-        gameid: gameID,
-        userName: currentUser.userName,
-        user_ip: currentUser.user_IP,
-        useruid: currentUser.user_uid
-    }
-
-    console.log("enregistrant joc a la base de dades");
-    //enregistra el new game a la base de dades de games
-    set(ref(database, 'games/' + game.game_uid), {
-        checkpoint: game.checkpoint,
-        duracion: game.duracion,
-        fechaFin: game.fechaFin,
-        fechaInicio: game.fechaInicio,
-        gameid: game.gameid,
-        userName: game.userName,
-        user_ip: game.user_ip,
-        useruid: game.useruid
-    })
-
-
-
-
-
-
-    console.log("joc enregistrat a la base de dades");
-
-
-};
-
-//carrega el joc amb el checkpoint especificat, carrega les variables a utilizar en els jocs i re
-function loadGame(gameID, checkPoint) {
-
-    localStorage.setItem("checkPoint", checkPoint);
-    localStorage.setItem("gameID", gameID);
-
-
-}
 
 
 
