@@ -82,13 +82,10 @@ function comprovaResposta() {
   if (  httpRequest(url) != "null" ) {
     // L'entrada dona true
   
-    let checkPoint = localStorage.getItem("checkPoint");
-    let gameID = localStorage.getItem("gameID");
+    localStorage.setItem("checkPoint", input.toLowerCase());
 
-    console.log(checkPoint)
-    console.log(gameID)
     //window.location.href = "joc2.html";
-    //window.location.href = "gameLoader.html";
+    window.location.href = "gameUpdater.html";
   
   } else {
     // L'entrada no correspon amb la contrasnya
