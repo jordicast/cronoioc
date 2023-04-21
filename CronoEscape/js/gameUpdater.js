@@ -38,8 +38,66 @@ const database = getDatabase(app);
 
 
 
+let newCheckpoint = localStorage.getItem("checkPoint");
+let gameID = localStorage.getItem("gameID");
+console.log(newCheckpoint);
+console.log(gameID);
 
 
-console.log("gameUpdater.js loaded");
-console.log(localStorage.getItem("checkPoint"));
-console.log(localStorage.getItem("gameID"));
+const url = `https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/games/${gameID}/.json`;
+
+let game = JSON.parse(httpRequest(url));
+
+
+game.checkpoint = newCheckpoint;
+
+
+
+
+updateGame(game);
+
+
+//redirects to game_loader.html
+
+
+
+
+
+
+
+
+function redirect(){
+    window.location.href = "game_loader.html";
+}
+
+
+
+function updateGame(game){
+    const dbRef = ref(database, 'games/' + gameID);
+    //after update, redirect to game_loader.html
+    update(dbRef, game).then(redirect);
+    
+    
+    
+
+}
+
+
+
+
+
+/////////////////////////////////////////
+//HTTP REQUEST METHODS
+
+
+//function to make an http request to the URL and return the response
+function httpRequest(url) {
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.open('GET', url, false);
+    httpRequest.send();
+    if (httpRequest.status === 200) {
+        return httpRequest.responseText;
+    } else {
+        return null;
+    }
+}
