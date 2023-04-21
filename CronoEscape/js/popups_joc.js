@@ -85,7 +85,7 @@ function comprovaResposta() {
     localStorage.setItem("checkPoint", input.toLowerCase());
 
     //window.location.href = "joc2.html";
-    window.location.href = "gameUpdater.html";
+    window.location.href = "game_updater.html";
   
   } else {
     // L'entrada no correspon amb la contrasnya
