@@ -75,8 +75,8 @@ function getCurrentUserData(auth) {
 
                     searchGame(currentUser);
 
-                    let checkPoint = localStorage.getItem("checkPoint");
-                    redirectToGame(checkPoint);
+                    let checkPoint = localStorage.getItem("checkPoint").then(
+                    redirectToGame(localStorage.getItem("checkPoint")));
 
 
 
