@@ -260,21 +260,21 @@ function redirectToGame(checkPoint) {
     //check if the checkpoint corresponds to the checkpoint of the resposta1
     let data1 = httpRequest(`https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta1/${checkPoint}/.json`);
     if (data1 != "null") {
-        gameUrl = "joc2.html"
+        gameUrl = "joc1.html"
     }
 
 
     //check if the checkpoint corresponds to the checkpoint of the resposta2
     let data2 = httpRequest(`https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta2/${checkPoint}/.json`);
     if (data2 != "null") {
-        gameUrl = "joc3.html"
+        gameUrl = "joc2.html"
     }
 
 
     //check if the checkpoint corresponds to the checkpoint of the resposta3
     let data3 = httpRequest(`https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta3/${checkPoint}/.json`);
     if (data3 != "null") {
-        gameUrl = "joc4.html"
+        gameUrl = "joc3.html"
     }
     
 
