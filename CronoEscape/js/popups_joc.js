@@ -95,6 +95,60 @@ function comprovaResposta() {
 }
 
 
+
+//PopUp Movil
+var movilOK = false;
+function PopUpMovil() {
+  var div = document.querySelector(".PopUps");
+  var text = `<div id="PopUp" style="display:block; position:fixed; top:0; left:0; width:100%; height:100%; background-color: transparent;">
+  <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:10px;">
+  <button class="btn btn-primary" onclick="cerrarPopUp()" id="tancar">X</button>
+    <img src="../img/juego3/qr-popup.png" width="50%" style="float: right;">
+  </div>
+</div>`;
+  movilOK = true;
+  console.log("Movil actiu");
+  div.innerHTML = text;
+}
+
+//PopUp Ordinador JOC3 Futur
+function PopUpPC3() {
+  var div = document.querySelector(".PopUps");
+
+  var text = `<div id="PopUp" style="display:block; position:fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0,0,0,0.5);">
+  <div style="display:block; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fff; padding:50px;">
+  <button class="btn " onclick="cerrarPopUp()" id="tancar">X</button>
+    <img src="../img/juego3/pc_popup.png">
+    <input id="input_resposta" type="text" style="position:absolute; top: 65%; left: 65% ;background-color:transparent; border:none; font-size: 40px; color: white;
+    transform: translate(-50%, -50%);" type="text" placeholder="Introdueix la resposta">
+    <button class="btn btn-primary" style="position:absolute; top: 80%; left: 50% ; font-size: 25px;
+    transform: translate(-50%, -50%);" onclick="comprovaResposta()">Comprova</button>
+  </div>
+  </div>`;
+  div.innerHTML = text;
+}
+
+//Comprova resposta ordinador JOC 3 FUTUR
+function comprovaResposta() {
+  var input = document.getElementById("input_resposta").value;
+
+  let url = `https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta3/${input.toLowerCase()}/.json`;
+  if (  httpRequest(url) != "null" ) {
+    // L'entrada dona true
+  
+    localStorage.setItem("checkPoint", input.toLowerCase());
+
+    //window.location.href = "joc2.html";
+    window.location.href = "game_updater.html";
+  
+  } else {
+    // L'entrada no correspon amb la contrasnya
+    alert("Resposta errònia");
+    
+  }
+}
+
+
 /////////////////////////////////////////
 //HTTP REQUEST METHODS
 
