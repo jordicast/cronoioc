@@ -496,6 +496,7 @@ function carregaScript() {
 function completeGame() {
     let vic = new Audio("sfx/victory.mp3");
     vic.play();
+    localStorage.setItem("pacman","completed");
 
 }
 
