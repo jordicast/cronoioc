@@ -755,6 +755,50 @@ nav.main-menu {
  
 }
 
+
+/* Imatges de joc3 ->joc2.html */
+.photo3 {
+  width: 110px !important;
+  height: 120px !important;
+}
+
+.pc3 {
+  width: 230px !important;
+  height: 190px !important;
+  margin-top: 60px;
+  margin-left: 70px;
+}
+
+.pc3:hover {
+  content: url('../img/juego3/pc_sel.png'); 
+}
+
+.movil {
+  width: 30% !important;
+  height: 15% !important;
+  margin-top: 200px;
+  margin-left: -100px;
+}
+
+.movil:hover {
+  content: url('../img/juego3/movil_sel.png'); 
+}
+
+.qr {
+  width: 30% !important;
+  height: 30% !important;
+  opacity: 50%;
+  margin-top: 100px;
+  margin-left: -70px;
+}
+
+.maquina3 {
+  width: 210px !important;
+  height: 270px !important;
+  margin-top: -89px;
+  margin-left: 20px;
+}
+
 /* Mostrem missatge si la resolucio es menor a 1000px */
 @media screen and (max-width: 1000px) {
   .warning-message {
