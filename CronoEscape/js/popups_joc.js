@@ -91,7 +91,6 @@ function comprovaResposta1() {
 
       localStorage.setItem("checkPoint", input.toLowerCase());
 
-      //window.location.href = "joc2.html";
       window.location.href = "game_updater.html";
 
     } else {
@@ -130,7 +129,6 @@ function comprovaResposta2() {
 
       localStorage.setItem("checkPoint", input.toLowerCase());
 
-      //window.location.href = "joc2.html";
       window.location.href = "game_updater.html";
 
     } else {
