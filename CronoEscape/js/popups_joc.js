@@ -68,34 +68,83 @@ function PopUpPC() {
     <input id="input_resposta" type="text" style="position:absolute; top: 65%; left: 65% ;background-color:transparent; border:none; font-size: 40px; color: white;
     transform: translate(-50%, -50%);" type="text" placeholder="Introdueix la resposta">
     <button class="btn btn-primary" style="position:absolute; top: 80%; left: 50% ; font-size: 25px;
-    transform: translate(-50%, -50%);" onclick="comprovaResposta()">Comprova</button>
+    transform: translate(-50%, -50%);" onclick="comprovaResposta1()">Comprova</button>
   </div>
   </div>`;
   div.innerHTML = text;
 }
 
 //Comprova resposta ordinador
-function comprovaResposta() {
-  var input = document.getElementById("input_resposta").value;
-  console.log(input)
+function comprovaResposta1() {
 
-  let url = `https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta1/${input.toLowerCase()}/.json`;
-  
-  if (  httpRequest(url) != "null" ) {
-    // L'entrada dona true
-  
-    localStorage.setItem("checkPoint", input.toLowerCase());
+  let input = document.getElementById("input_resposta").value.toLowerCase();
+  //input tiene que ser mayor a 3 caracteres y no admite espacios ni caracteres especiales using regex
+  if (input.length > 3 && input.match(/^[a-zA-Z0-9]+$/)) {
+    //Comprova si la resposta és correcta
+    let url = `https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta1/${input}/.json`;
 
-    //window.location.href = "joc2.html";
-    window.location.href = "game_updater.html";
-  
-  } else {
-    // L'entrada no correspon amb la contrasnya
-    alert("Resposta errònia");
+
+    let data = httpRequest(url);
     
+    if (data != "null") {
+      // L'entrada dona true
+
+      localStorage.setItem("checkPoint", input.toLowerCase());
+
+      //window.location.href = "joc2.html";
+      window.location.href = "game_updater.html";
+
+    } else {
+      // L'entrada no correspon amb la contrasnya
+      alert("Resposta errònia");
+
+    }
+
+
+
+
   }
+
+
+
+
 }
 
+
+
+//PopUp Ordinador JOC2
+
+function comprovaResposta2() {
+
+  let input = document.getElementById("input_resposta").value.toLowerCase();
+  //input tiene que ser mayor a 3 caracteres y no admite espacios ni caracteres especiales using regex
+  if (input.length > 3 && input.match(/^[a-zA-Z0-9]+$/)) {
+    //Comprova si la resposta és correcta
+    let url = `https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta2/${input}/.json`;
+
+
+    let data = httpRequest(url);
+    
+    if (data != "null") {
+      // L'entrada dona true
+
+      localStorage.setItem("checkPoint", input.toLowerCase());
+
+      //window.location.href = "joc2.html";
+      window.location.href = "game_updater.html";
+
+    } else {
+      // L'entrada no correspon amb la contrasnya
+      alert("Resposta errònia");
+
+    }
+
+
+
+
+  }
+
+}
 
 
 //PopUp Movil
@@ -124,30 +173,43 @@ function PopUpPC3() {
     <input id="input_resposta" type="text" style="position:absolute; top: 65%; left: 65% ;background-color:transparent; border:none; font-size: 40px; color: white;
     transform: translate(-50%, -50%);" type="text" placeholder="Introdueix la resposta">
     <button class="btn btn-primary" style="position:absolute; top: 80%; left: 50% ; font-size: 25px;
-    transform: translate(-50%, -50%);" onclick="comprovaResposta()">Comprova</button>
+    transform: translate(-50%, -50%);" onclick="comprovaResposta3()">Comprova</button>
   </div>
   </div>`;
   div.innerHTML = text;
 }
 
 //Comprova resposta ordinador JOC 3 FUTUR
-function comprovaResposta() {
-  var input = document.getElementById("input_resposta").value;
+function comprovaResposta3() {
 
-  let url = `https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta3/${input.toLowerCase()}/.json`;
-  if (  httpRequest(url) != "null" ) {
-    // L'entrada dona true
-  
-    localStorage.setItem("checkPoint", input.toLowerCase());
+  let input = document.getElementById("input_resposta").value.toLowerCase();
+  //input tiene que ser mayor a 3 caracteres y no admite espacios ni caracteres especiales using regex
+  if (input.length > 3 && input.match(/^[a-zA-Z0-9]+$/)) {
+    //Comprova si la resposta és correcta
+    let url = `https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta3/${input}/.json`;
 
-    //window.location.href = "joc2.html";
-    window.location.href = "game_updater.html";
-  
-  } else {
-    // L'entrada no correspon amb la contrasnya
-    alert("Resposta errònia");
+
+    let data = httpRequest(url);
     
+    if (data != "null") {
+      // L'entrada dona true
+
+      localStorage.setItem("checkPoint", input.toLowerCase());
+
+      //window.location.href = "joc2.html";
+      window.location.href = "game_updater.html";
+
+    } else {
+      // L'entrada no correspon amb la contrasnya
+      alert("Resposta errònia");
+
+    }
+
+
+
+
   }
+
 }
 
 
@@ -161,8 +223,8 @@ function httpRequest(url) {
   httpRequest.open('GET', url, false);
   httpRequest.send();
   if (httpRequest.status === 200) {
-      return httpRequest.responseText;
+    return httpRequest.responseText;
   } else {
-      return null;
+    return null;
   }
 }
