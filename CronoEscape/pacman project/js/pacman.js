@@ -3,7 +3,10 @@ $(carregaScript);
 
 function carregaScript() {
 
-
+    if(localStorage.getItem("pacman") != null){
+        //redirects to joc2.html
+        window.location.href = "/CronoEscape/pages/joc1.html";
+    }
 
 
 
@@ -498,6 +501,11 @@ function completeGame() {
     vic.play();
     localStorage.setItem("pacman","completed");
     console.log(localStorage.getItem("pacman"));
+    vic.onended = function () {
+        location.reload();
+    };
+
+    
 
 }
 
