@@ -72,10 +72,11 @@ function redirect(){
 
 
 
-function updateGame(game){
+async function updateGame(game){
     const dbRef = ref(database, 'games/' + gameID);
     //after update, redirect to game_loader.html
-    update(dbRef, game).then(redirect);
+    await update(dbRef, game);
+    redirect();
     
     
     

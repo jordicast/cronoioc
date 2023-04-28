@@ -72,11 +72,14 @@ function getCurrentUserData(auth) {
 
                     }
 
+                    cargar();
 
-                    searchGame(currentUser)
-                    
-                    
-                    redirectToGame(localStorage.getItem("checkPoint"));
+                    async function cargar() {
+                        let checkPoint = await searchGame(currentUser)
+                        console.log(checkPoint + " loaded")
+                        redirectToGame(checkPoint);
+                    }
+
 
 
 
@@ -114,7 +117,7 @@ async function searchGame(currentUser) {
         console.log("creating first game");
         await createGame(currentUser, 0);
         loadGame(currentUser.user_uid + "1", -1);
-        return;
+        return "-1";
     }
 
 
@@ -128,7 +131,7 @@ async function searchGame(currentUser) {
             let currentCheckpoint = ownGames[game].checkpoint;
 
             loadGame(currentUser.user_uid + ownGames[game].gameid, currentCheckpoint);
-            return;
+            return currentCheckpoint;
         }
 
     }
@@ -137,6 +140,7 @@ async function searchGame(currentUser) {
     let gameID = currentUser.user_uid + "" + (ownGames.length + 1);
     createGame(currentUser, ownGames.length);
     loadGame(gameID, -1);
+    return "-1";
 
 }
 
@@ -276,7 +280,7 @@ async function redirectToGame(checkPoint) {
     if (data3 != "null") {
         gameUrl = "joc3.html"
     }
-    
+
 
     //redirects page to game url
     window.location.href = gameUrl;
