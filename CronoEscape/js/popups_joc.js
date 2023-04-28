@@ -177,6 +177,22 @@ function PopUpPC3() {
   div.innerHTML = text;
 }
 
+//PopUp Ruleta JOC3 Futur
+function PopUpRuleta() {
+  var div = document.querySelector(".PopUps");
+
+  var text = `<div id="PopUp" style="display:block; position:fixed; top:0; left:0; width:100%; height:100%; background-color: transparent;">
+  <div style="position:absolute; top:50%; left:50%; transform:translate(-20%, -20%); padding:10px;">
+  <button class="btn btn-primary" onclick="cerrarPopUp()" id="tancar2">X</button>
+    <img src="../img/juego3/ruleta_popup.png" width="50%" style="float: right top: -10%;">
+  </div>
+</div>`;
+  ruletaOK = true;
+  console.log("Ruleta actiu");
+  div.innerHTML = text;
+}
+
+
 //Comprova resposta ordinador JOC 3 FUTUR
 function comprovaResposta3() {
 
