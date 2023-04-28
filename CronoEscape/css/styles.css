@@ -133,6 +133,13 @@ form button:hover {
   right: 10px;
 }
 
+
+#tancar2 {
+  position: fixed;
+  top: 10px !important;
+  right: 300px !important;
+}
+
 .btn:hover {
   background-color: #0069D9;
 	color: #FFFFFF !important;
@@ -757,15 +764,11 @@ nav.main-menu {
 
 
 /* Imatges de joc3 ->joc2.html */
-.photo3 {
-  width: 110px !important;
-  height: 120px !important;
-}
 
 .pc3 {
   width: 230px !important;
   height: 190px !important;
-  margin-top: 60px;
+  margin-top: 180px;
   margin-left: 70px;
 }
 
@@ -775,8 +778,8 @@ nav.main-menu {
 
 .movil {
   width: 30% !important;
-  height: 15% !important;
-  margin-top: 200px;
+  height: 10% !important;
+  margin-top: 320px;
   margin-left: -100px;
 }
 
@@ -788,8 +791,8 @@ nav.main-menu {
   width: 30% !important;
   height: 30% !important;
   opacity: 50%;
-  margin-top: 100px;
-  margin-left: -70px;
+  margin-top: 190px;
+  margin-left: -130px;
 }
 
 .maquina3 {
@@ -798,6 +801,19 @@ nav.main-menu {
   margin-top: -89px;
   margin-left: 20px;
 }
+
+.ruleta {
+  width: 15% ;
+  height: 22% ;
+  opacity: 100%;
+  margin-top: 50px;
+  margin-left: -50px;
+}
+
+.ruleta:hover {
+  content: url('../img/juego3/ruleta_sel.png'); 
+}
+
 
 /* Mostrem missatge si la resolucio es menor a 1000px */
 @media screen and (max-width: 1000px) {
