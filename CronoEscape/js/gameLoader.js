@@ -106,13 +106,13 @@ function getCurrentUserData(auth) {
 **busca si existeixen jocs per l'usuari actual, si no existeixen crea un nou joc i el carrega, 
 **si existeixen carrega el joc amb checkpoint que no sigui 999(finalitzat), si tots els jocs estan finalitzats crea un nou joc i el carrega**/
 
-function searchGame(currentUser) {
+async function searchGame(currentUser) {
     console.log("Buscant joc");
-    let ownGames = getOwnGames(currentUser);
+    let ownGames = await getOwnGames(currentUser);
     //si no existeixen jocs crea un nou joc i el pushea a la bd després carrega directament el checkpoint -1(sense inicialitzar)
     if (ownGames.length == 0) {
         console.log("creating first game");
-        createGame(currentUser, 0);
+        await createGame(currentUser, 0);
         loadGame(currentUser.user_uid + "1", -1);
         return;
     }
@@ -143,7 +143,7 @@ function searchGame(currentUser) {
 
 
 //crea un nou game amb id = currentUser.user_uid+(ownGames.length+1) i checkpoint = -1 (sense inicialitzar)
-function createGame(currentUser, ownGameslength) {
+async function createGame(currentUser, ownGameslength) {
     let gameID = parseInt(ownGameslength) + 1;
     let uid = currentUser.user_uid + gameID.toString();
 
@@ -194,7 +194,7 @@ function loadGame(gameID, checkPoint) {
 
 
 //gets all the games from the database and returns them in an array of objects
-function getOwnGames(user) {
+async function getOwnGames(user) {
     let url = `${firebaseConfig.databaseURL}/games/.json`;
     let response = httpRequest(url);
     let jsonGames = JSON.parse(response);
@@ -254,7 +254,7 @@ function httpRequest(url) {
 
 
 
-function redirectToGame(checkPoint) {
+async function redirectToGame(checkPoint) {
     let gameUrl = "joc.html";
 
     //check if the checkpoint corresponds to the checkpoint of the resposta1
