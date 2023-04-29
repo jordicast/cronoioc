@@ -763,6 +763,44 @@ nav.main-menu {
 }
 
 
+/* Imatges de joc2 ->joc1.html */
+.maquina2 {
+  width: 150px !important;
+  height: 200px !important;
+  margin-top: -50px;
+}
+
+.pc2 {
+  width: 170px !important;
+  height: 140px !important;
+  margin-top: -170px;
+  margin-left: 60px;
+}
+.pacman {
+  width: 190px !important;
+  margin-top: -270px;
+  margin-left: 30px;
+}
+.moneda {
+  width: 20px !important;
+  margin-top: 380px;
+  margin-left: -150px;
+}
+.radio {
+  width: 130px !important;
+  margin-top: 220px;
+  margin-left: -130px;
+}
+
+
+.pc2:hover {
+  content: url('../img/juego2/pc_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
+}
+.radio:hover {
+  content: url('../img/juego2/radio_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
+}
+
+
 /* Imatges de joc3 ->joc2.html */
 
 .pc3 {
