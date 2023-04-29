@@ -242,3 +242,83 @@ function httpRequest(url) {
     return null;
   }
 }
+
+
+/////////////////////////////////////////
+//JOC 2 (PASSAT)
+
+
+//PopUp Moneda
+var coinOK = false;
+function PopUpCoin() {
+  
+  var div = document.querySelector(".PopUps");
+  var text = `<div id="PopUp" style="display:block; position:fixed; top:0; left:0; width:100%; height:100%; background-color: transparent;">
+  <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color:transparent; padding:10px;">
+    <img src="../img/juego2/coin-flip.gif">
+  </div>
+<audio id="soCoin" src="../audio/coin.mp3" autoplay></audio>
+</div>`;
+  div.innerHTML = text;
+  setTimeout(function () {
+    div.innerHTML = "";
+  }, 2000);
+  document.querySelector(".moneda").style.visibility = "hidden";
+  coinOK = true;
+  console.log("Moneda activada");
+}
+
+//PopUp Ordinador
+function PopUpPC2() {
+  var div = document.querySelector(".PopUps");
+
+  var text = `<div id="PopUp" style="display:block; position:fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0,0,0,0.5);">
+  <div style="display:block; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fff; padding:50px;">
+  <button class="btn " onclick="cerrarPopUp()" id="tancar">X</button>
+    <img src="../img/juego2/pc_popup.png">
+    <input id="input_resposta" type="text" style="position:absolute; top: 62%; left: 50% ;background-color:transparent; border:none; font-size: 40px; color: lightgreen;
+    font-family: Monaco, monospace; transform: translate(-50%, -50%);" type="text" placeholder="Introdueix resposta">
+    <button class="btn btn-primary" style="position:absolute; top: 80%; left: 50% ; font-size: 25px;
+    transform: translate(-50%, -50%);" onclick="comprovaResposta2()">Comprova</button>
+  </div>
+  </div>`;
+  div.innerHTML = text;
+}
+//PopUP RADIO
+var radioOK = false;
+function PopUpRadio() {
+  var div = document.querySelector(".PopUps");
+  var text = `<div id="PopUp" style="display:block; position:fixed; top:0; left:0; width:100%; height:100%; background-color: transparent;">
+  <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fff; padding:40px;">
+  <button class="btn " onclick="cerrarPopUpRadio()" id="tancar">X</button>
+  <img style="width:90%;"src="../img/juego2/radio.png">
+  <audio id="miAudio" src="../audio/money.mp3" autoplay></audio>
+  </div>
+</div>`;
+
+  div.innerHTML = text;
+  radioOK = true;
+  console.log("Radio activada");
+}
+
+//TANCAR POPUP RADIO
+function cerrarPopUpRadio() {
+  document.getElementById("PopUp").style.display = "none";
+  //Serveix per parar el video al tancar el popup
+  document.getElementById("miAudio").pause();
+}
+//FINESTRE PACMAN
+function PopUpPacman() {
+  if (radioOK == true && coinOK == true) {
+      var width = 700;
+      var height = 700;
+      var left = (window.innerWidth / 2) - (width / 2);
+      var top = (window.innerHeight / 2) - (height / 2);
+      var url = "../pacman project/pacman.html";
+      var options = "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top;
+      window.open(url, "Mi Popup", options);
+
+  }
+}
+
+
