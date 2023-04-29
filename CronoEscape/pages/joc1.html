@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="icon" type="image/jpg" href="../img/favicon.png" />
 
-  <script src="../js/botonsfoot.js"></script>
+  
+  <script src="../js/botonsfoot2.js";></script>
+  <script src="../js/joc2.js";></script>
+  <script src="../js/popups_joc.js";></script>
+
   </head>
   <body>
     <header>
@@ -21,7 +25,7 @@
           <ul class="navbar-nav ml-auto">
 
             <li class="nav-item">
-              <a class="btn nav-link" href="../index.html">Home</a>
+              <a class="btn nav-link" href="../pages/register.html">Home</a>
             </li>
           </ul>
         </div>
@@ -29,17 +33,88 @@
     </header>
 
     <main>
-      <section class="container mt-5">
-  <!-- CODI -->
+      <div class="warning-message"><h3 style="color:crimson"><br><br>La mida de la finestra no permet jugar, <br>si us plau amplia la mida de la finestra.</h3><br><br></div>
+      <section class="zona-joc container mt-5">
+        <div class="game-container ">
+        <!-- carrega de fons de joc amb la class bg-img -->
+        <div style="background-image: url('../img/juego2/fondojuego2.jpg'); background-size: cover; width: 800px; height: 566px;" id="bgImgContainer">
+          
+           <!-- pre-carrega de imatges en ocult -->
+          <img src="../img/juego2/arcade.png" class="hidden-image">
+          <img src="../img/juego2/coin-flip.gif" class="hidden-image">
+          <img src="../img/juego2/moneda.png" class="hidden-image">
+          <img src="../img/juego2/pc.png" class="hidden-image">
+          <img src="../img/juego2/pc_popup.png" class="hidden-image">
+          <img src="../img/juego2/pc_sel.png" class="hidden-image">
+          <img src="../img/juego2/radio.png" class="hidden-image">
+          <img src="../img/juego2/radio_sel.png" class="hidden-image">
+          <img src="../img/juego2/serp.gif" class="hidden-image">
+          <img src="../img/juego1/on/maquina_off.png" class="hidden-image">
+          <img src="../img/juego1/on/maquina_off_sel.png" class="hidden-image">
+          <img src="../img/juego1/on/maquina_on.png" class="hidden-image">
+          <img src="../img/juego1/on/maquina_on_sel.png" class="hidden-image">
 
-EN CONSTRUCCIÓ
+          <!-- carrega elements joc -->
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <!-- Contenido de la columna 1 -->
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <!-- Contenido de la columna 2-->
+            </div>
+            <div class="col-lg-4 col-md-12"> 
+              <!-- Contenido de la columna 3 --> 
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <!--Contenido de la columna 4-->
+             
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <img src="../img/juego2/moneda.png" onclick="PopUpCoin()" class="moneda">
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <img src="../img/juego2/radio.png" onclick="PopUpRadio()" class="radio" >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <img src="../img/juego2/arcade.png" onclick="PopUpPacman()" class="pacman" >
+             
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <img src="../img/juego2/pc.png" onclick="PopUpPC2()" class="pc2">
+          
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <img src="../img/juego1/on/maquina_on.png" id="maquinaON" class="maquina2" onclick="cambiarImatge()">
+               <!--Contenido de la columna 9 -->
+            </div>
+          </div>
 
+          <audio id="so">
+            <source src="../audio/so-maquina.mp3" type="audio/mp3">
+          </audio>
 
+          
+          <!--Div contenedor de PopUps -->
+          <div class="PopUps"></div>
 
+        </div>
 
-
-
+        </div>
         
+<script>
+        // obtenemos el elemento del mensaje de advertencia
+        var warningMessage = document.getElementById("warning-message");
+        
+        // verificamos si la resolución es menor a 1000px y mostramos el mensaje de advertencia
+        if (window.matchMedia("(max-width: 1000px)").matches) {
+          warningMessage.style.display = "block";
+        }
+</script>
+
       </section>
     </main>
     <div class="container"></div>
@@ -78,7 +153,7 @@ EN CONSTRUCCIÓ
   
       </div>
     </footer>
-
+    <script src="../js/auth_logged.js" type="module"></script>
   </body>
   
   </html>
