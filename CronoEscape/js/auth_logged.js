@@ -89,7 +89,7 @@ function getCurrentUserData(auth) {
 
                     }
                     //si la url es user_profile carrega les dades de l'usuari i els jocs, si conté joc.html carrega el joc
-                    if (!window.location.href.includes("/joc.html") && !window.location.href.includes("/game_loader.html")) {
+                    if (!window.location.href.includes("/joc") && !window.location.href.includes("/game_loader.html")) {
                         renderUserData(currentUser);
                         renderUserGames(currentUser);
                         return;
