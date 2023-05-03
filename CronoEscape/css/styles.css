@@ -814,15 +814,15 @@ nav.main-menu {
   content: url('../img/juego3/pc_sel.png'); 
 }
 
-.movil {
+.m.movil {
   width: 30% !important;
   height: 10% !important;
   margin-top: 320px;
-  margin-left: -100px;
+  margin-left: -40px;
 }
 
 .movil:hover {
-  content: url('../img/juego3/movil_sel.png'); 
+  content: url('../img/juego3/HoloPhone_encendido.png'); 
 }
 
 .qr {
