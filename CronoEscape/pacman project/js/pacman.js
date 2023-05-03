@@ -3,10 +3,13 @@ $(carregaScript);
 
 function carregaScript() {
 
-    if(localStorage.getItem("pacman") != null){
-        //redirects to joc2.html
-        window.location.href = "/CronoEscape/pages/joc1.html";
+    if (localStorage.getItem("pacman") != null) {
+        //loads the snake animation on the grid
+        console.log("solved");
+        document.getElementById("grid").innerHTML = `<img src="../img/juego2/serp_noloop.gif"/>`;
+        return;
     }
+
 
 
 
@@ -499,13 +502,15 @@ function carregaScript() {
 function completeGame() {
     let vic = new Audio("sfx/victory.mp3");
     vic.play();
-    localStorage.setItem("pacman","completed");
+    localStorage.setItem("pacman", "completed");
     console.log(localStorage.getItem("pacman"));
-    vic.onended = function () {
+    //wait 3 seconds and reload page
+    setTimeout(function () {
         location.reload();
-    };
+    }, 3000);
 
-    
+
+
 
 }
 
