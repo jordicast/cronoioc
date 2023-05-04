@@ -85,7 +85,8 @@ function getCurrentUserData(auth) {
                         oldUserUID: snapshot.val().oldUserUID.toString(),
                         phone: snapshot.val().phone.toString(),
                         userName: snapshot.val().userName.toString(),
-                        user_IP: snapshot.val().user_IP.toString()
+                        user_IP: snapshot.val().user_IP.toString(),
+                         avatar: snapshot.val().avatar.toString()
 
                     }
                     //si la url es user_profile carrega les dades de l'usuari i els jocs, si conté joc.html carrega el joc
@@ -123,7 +124,9 @@ function renderUserData(currentUser) {
     // Mostra el total de partides que ha realitzat l'usuari
     const numGamesPlayed = getOwnGames(currentUser).length;
     document.getElementById("games-played").innerHTML += ` ${numGamesPlayed}`;
-
+    // Assignem avatar amb el numero random que s'ha seleccionat aleatoriament al register
+    let avatar = document.getElementById("imatge-avatar");
+    avatar.src = `../img/avatar${currentUser.avatar}.png`;
 }
 
 
