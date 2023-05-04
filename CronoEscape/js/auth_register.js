@@ -43,7 +43,7 @@ let user = {
     number: "",
     userName: "",
     password: "",
-
+    avatar: numRandom(),
     oldUserUID: null,
     playedGames: 0,
 };
@@ -451,6 +451,12 @@ function dataExists(url) {
         return false;
     }
 }
+
+//funció número random entre 1 i 10 per assignar avatar
+function numRandom() {
+    return Math.floor(Math.random() * 10) + 1;
+}
+
 
 
 //FIN HTTP REQUEST METHODS
