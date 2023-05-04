@@ -4,7 +4,7 @@
 import { } from "https://www.gstatic.com/firebasejs/6.0.2/firebase.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
-import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+import { getDatabase, ref, get, set , update} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 
 if (window.localStorage.getItem('id') == null) {
     //redirect to the login.html page if the user is not logged in
@@ -78,8 +78,35 @@ function getCurrentUserData(auth) {
                     }
                     //si la url es user_profile carrega les dades de l'usuari i els jocs, si conté joc.html carrega el joc
                     if (!window.location.href.includes("/joc.html") && !window.location.href.includes("/game_loader.html")) {
+
+                        let newCheckpoint = 999;
+                        let gameID = localStorage.getItem("gameID");
+
+                        const url = `https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/games/${gameID}/.json`;
+
+                        let game = JSON.parse(httpRequest(url));
+
+                        game.checkpoint = newCheckpoint;
+
+
+                        updateGame(game);
                         renderUserData(currentUser);
                         renderUserGames(currentUser);
+                        
+
+                        function updateGame(game) {
+                            const dbRef = ref(database, 'games/' + gameID);
+                            //after update, redirect to game_loader.html
+                            update(dbRef, game);
+                            //redirect();
+
+                        }
+
+
+
+
+
+
                         return;
                     }
 
@@ -102,7 +129,7 @@ function getCurrentUserData(auth) {
 //ESTA FUNCION PINTA LOS DATOS DEL USUARIO EN EL PERFIL
 function renderUserData(currentUser) {
 
-   //Convertim nom usuari en majúscula
+    //Convertim nom usuari en majúscula
     document.getElementById("userName-container").innerHTML += ` ${currentUser.userName.toUpperCase()}`
 
     // Si no hi ha cap joc en marxa surt de la funció
@@ -227,7 +254,7 @@ function renderUserGames(user) {
     //function to get ownRanking(user) entries inside ranking variable were ownRanking[i].duracion == null(no finalitzat) are removed and rendered
     for (let i = 0; i < ranking.length; i++) {
 
-        if (ranking[i].fechaFin == "null") {
+        if (ranking[i].checkpoint != 999) {
             ranking.splice(i, 1);
             i--;
         }
