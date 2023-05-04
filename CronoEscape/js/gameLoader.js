@@ -278,7 +278,7 @@ async function redirectToGame(checkPoint) {
     //check if the checkpoint corresponds to the checkpoint of the resposta3
     let data3 = httpRequest(`https://cronoescape-ioc-default-rtdb.europe-west1.firebasedatabase.app/respostes/resposta3/${checkPoint}/.json`);
     if (data3 != "null") {
-        gameUrl = "joc3.html"
+        gameUrl = "final.html"
     }
 
 
