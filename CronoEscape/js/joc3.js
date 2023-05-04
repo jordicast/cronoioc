@@ -1,6 +1,3 @@
-//import all modules needed for a phone aut
-
-
 import { } from "https://www.gstatic.com/firebasejs/6.0.2/firebase.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
@@ -88,6 +85,9 @@ function getCurrentUserData(auth) {
 
                         game.checkpoint = newCheckpoint;
 
+
+                        //waits 2 seconds then proceeds with next line of code
+                        
 
                         updateGame(game);
                         renderUserData(currentUser);
