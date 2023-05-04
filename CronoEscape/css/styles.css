@@ -897,6 +897,36 @@ min-height: 100vh !important;
   font-weight: bold;
 }
 
+/**-------------Pàgina final ----------------- **/
+
+#textJoc3  {
+  color: white;
+  font-weight: bold;
+}
+
+
+#tempsJugat  {
+  color: white;
+}
+
+#enhorabona  {
+  color: #5495ff;
+  font-weight: bold;
+  font-size: xx-large;
+  
+}
+
+#final-perfil, #final-Ranking {
+  background-color: #5495ff;
+  color: #ffffff;
+}
+
+#final-perfil:hover, #final-Ranking:hover {
+  background-color: #ffffff;
+	color: #0069D9 !important;
+  cursor:pointer;
+}
+
 
 /** ESTIL TAULA RANKING**/
 .table {
