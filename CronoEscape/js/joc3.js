@@ -84,9 +84,14 @@ function getCurrentUserData(auth) {
                         let game = JSON.parse(httpRequest(url));
 
                         game.checkpoint = newCheckpoint;
+                        game.fechaFin = getCurrentDate();
+
+                        let calculo = game.fechaFin - game.fechaInicio;
+
+                        game.duracion = dateToString(calculo);
+                        //convert the time in milliseconds to a string with the format hh:mm:ss
 
 
-                        //waits 2 seconds then proceeds with next line of code
 
 
                         updateGame(game);
@@ -382,13 +387,36 @@ function tempsTotal(startDate, endDate) {
     return `${hores}:${minuts}:${segons}`;
 }
 
-// Funció per convertir de date a string "HH:MM:SS".
+//function to given a date in miliseconds returns a string in format "HH:MM:SS" always with 2 digits
 function dateToString(date) {
-    const hores = date.getHours();
-    const minuts = date.getMinutes();
-    const segons = date.getSeconds();
+    let hores = date / 1000 / 60 / 60;
+    let minuts = (hores - Math.floor(hores)) * 60;
+    let segons = (minuts - Math.floor(minuts)) * 60;
+    hores = Math.floor(hores);
+    minuts = Math.floor(minuts);
+    segons = Math.floor(segons);
+    if (hores < 10) {
+        hores = "0" + hores;
+    }
+    if (minuts < 10) {
+        minuts = "0" + minuts;
+    }
+    if (segons < 10) {
+        segons = "0" + segons;
+    }
     return `${hores}:${minuts}:${segons}`;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // Funció per convertir de string "HH:MM:SS" a date en milisegons.
 function stringToDate(str) {
