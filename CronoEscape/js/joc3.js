@@ -1,7 +1,7 @@
 import { } from "https://www.gstatic.com/firebasejs/6.0.2/firebase.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
-import { getDatabase, ref, get, set , update} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+import { getDatabase, ref, get, set, update } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 
 if (window.localStorage.getItem('id') == null) {
     //redirect to the login.html page if the user is not logged in
@@ -87,19 +87,23 @@ function getCurrentUserData(auth) {
 
 
                         //waits 2 seconds then proceeds with next line of code
-                        
+
 
                         updateGame(game);
-                        renderUserData(currentUser);
-                        renderUserGames(currentUser);
-                        
 
-                        function updateGame(game) {
+
+
+
+                        async function updateGame(game) {
                             const dbRef = ref(database, 'games/' + gameID);
-                            //after update, redirect to game_loader.html
-                            update(dbRef, game);
-                            //redirect();
+                            await new Promise(r => setTimeout(r, 1000));
 
+                            update(dbRef, game);
+                            await new Promise(r => setTimeout(r, 1000));
+
+                            renderUserData(currentUser);
+                            await new Promise(r => setTimeout(r, 1000));
+                            renderUserGames(currentUser);
                         }
 
 

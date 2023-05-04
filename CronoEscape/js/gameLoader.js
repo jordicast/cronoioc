@@ -75,9 +75,14 @@ function getCurrentUserData(auth) {
                     cargar();
 
                     async function cargar() {
-                        let checkPoint = await searchGame(currentUser)
-                        console.log(checkPoint + " loaded")
-                        redirectToGame(checkPoint);
+                        let checkPoint = await searchGame(currentUser);
+                            console.log(checkPoint + " loaded")
+                            //wait 2 seconds then proceeds with the next line of code
+                            await new Promise(r => setTimeout(r, 2000));                            
+                                
+                            redirectToGame(checkPoint);
+                        
+
                     }
 
 
