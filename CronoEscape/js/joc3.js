@@ -6,15 +6,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebas
 import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 
-
-
-
-
 if (window.localStorage.getItem('id') == null) {
     //redirect to the login.html page if the user is not logged in
     window.location.href = "login.html";
 }
-
 
 const firebaseConfig = {
     apiKey: "AIzaSyDp_QjlZP6cah2JBQLIXKSbfKtOIUfZ4Tw",
@@ -26,7 +21,6 @@ const firebaseConfig = {
     appId: "1:240259839325:web:20ef18366fd73d2aa2a4b4",
     measurementId: "G-QQD81WK4CE"
 };
-
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -52,9 +46,6 @@ if (logoutButton != null) {
 
 }
 
-//FIN LOGOUT METHODS
-//////////////////////////////////////////
-
 //////////////////////////////////////////
 //USER PROFILE METHODS
 
@@ -62,8 +53,6 @@ let user_uid = window.localStorage.getItem('id');
 //retrieve user data from database to display in the user profile
 
 getCurrentUserData(auth);
-
-
 
 
 //function to get the user email from the firebase database
@@ -85,8 +74,7 @@ function getCurrentUserData(auth) {
                         oldUserUID: snapshot.val().oldUserUID.toString(),
                         phone: snapshot.val().phone.toString(),
                         userName: snapshot.val().userName.toString(),
-                        user_IP: snapshot.val().user_IP.toString(),
-                        avatar: snapshot.val().user_IP.toString()
+                        user_IP: snapshot.val().user_IP.toString()
                     }
                     //si la url es user_profile carrega les dades de l'usuari i els jocs, si conté joc.html carrega el joc
                     if (!window.location.href.includes("/joc.html") && !window.location.href.includes("/game_loader.html")) {
@@ -101,11 +89,6 @@ function getCurrentUserData(auth) {
                 } else {
                     console.log("No data available");
                 }
-
-                const avatarUrl = currentUser.avatar;
-                const avatarImg = document.getElementById('imatge-avatar');
-                avatarImg.src = avatarUrl;
-
             }).catch((error) => {
                 console.error(error);
             });
@@ -119,7 +102,13 @@ function getCurrentUserData(auth) {
 //ESTA FUNCION PINTA LOS DATOS DEL USUARIO EN EL PERFIL
 function renderUserData(currentUser) {
 
-    document.getElementById("userName-container").innerHTML += ` ${currentUser.userName}`
+   //Convertim nom usuari en majúscula
+    document.getElementById("userName-container").innerHTML += ` ${currentUser.userName.toUpperCase()}`
+
+    // Si no hi ha cap joc en marxa surt de la funció
+    if (document.getElementById("games-played") == null) {
+        return;
+    }
 
     // Mostra el correu de l'usuari
     document.getElementById("userEmailText").innerHTML += ` ${currentUser.email}`;
@@ -130,18 +119,6 @@ function renderUserData(currentUser) {
     document.getElementById("games-played").innerHTML += ` ${numGamesPlayed}`;
 
 }
-
-
-//FIN USER PROFILE METHODS
-//////////////////////////////////////////
-
-
-
-
-
-/////////////////////////////////////////
-//HTTP REQUEST METHODS
-
 
 //function to make an http request to the URL and return the response
 function httpRequest(url) {
@@ -165,10 +142,6 @@ function dataExists(url) {
     }
 }
 
-
-//FIN HTTP REQUEST METHODS
-//////////////////////////////////////////
-
 /////////////////////////////////////////
 //GAME METHODS
 
@@ -176,7 +149,6 @@ function dataExists(url) {
 /**funció searchGame(currentUser)
 **busca si existeixen jocs per l'usuari actual, si no existeixen crea un nou joc i el carrega, 
 **si existeixen carrega el joc amb checkpoint que no sigui 999(finalitzat), si tots els jocs estan finalitzats crea un nou joc i el carrega**/
-
 function searchGame(currentUser) {
     console.log("Buscant joc");
     let ownGames = getOwnGames(currentUser);
@@ -201,16 +173,13 @@ function searchGame(currentUser) {
             loadGame(currentUser.user_uid + ownGames[game].gameid, currentCheckpoint);
             return;
         }
-
     }
     //nomes arriva aqui si existeixen jocs pero no hi ha cap joc amb checkpoint diferent de 999(finalitzat)
     console.log("creating next game");
     let gameID = currentUser.user_uid + "" + (ownGames.length + 1);
     createGame(currentUser, ownGames.length);
     loadGame(gameID, -1);
-
 }
-
 
 
 //crea un nou game amb id = currentUser.user_uid+(ownGames.length+1) i checkpoint = -1 (sense inicialitzar)
@@ -243,14 +212,7 @@ function createGame(currentUser, ownGameslength) {
         useruid: game.useruid
     })
 
-
-
-
-
-
     console.log("joc enregistrat a la base de dades");
-
-
 };
 
 //carrega el joc amb el checkpoint especificat, carrega les variables a utilizar en els jocs i re
@@ -258,16 +220,7 @@ function loadGame(gameID, checkPoint) {
 
     localStorage.setItem("checkPoint", checkPoint);
     localStorage.setItem("gameID", gameID);
-
-
 }
-
-
-
-
-
-
-
 
 function renderUserGames(user) {
     let ranking = getOwnGames(user);
@@ -279,9 +232,6 @@ function renderUserGames(user) {
             i--;
         }
     }
-
-
-
 
     //sort ranking by time   
     ranking.sort(function (a, b) {
@@ -381,7 +331,6 @@ function getOwnGames(user) {
 };
 //FIN GAME METHODS
 
-
 // CALCUL TEMPS JOC
 
 // Funció per obtenir la data actual.
@@ -422,10 +371,6 @@ function stringToDate(str) {
 
 
 
-
-
-
-
 let botoPerfil = document.getElementById("final-perfil");
 if (botoPerfil != null) {
     botoPerfil.addEventListener('click', (e) => {
@@ -440,6 +385,10 @@ if (botoRanking != null) {
 
     });
 }
+
+
+
+
 
 
 
