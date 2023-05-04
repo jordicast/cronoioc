@@ -195,7 +195,7 @@ function renderUserGames(user) {
     //function to get ownRanking(user) entries inside ranking variable were ownRanking[i].duracion == null(no finalitzat) are removed and rendered
     for (let i = 0; i < ranking.length; i++) {
 
-        if (ranking[i].fechaFin == "null") {
+        if (ranking[i].checkpoint != 999) {
             ranking.splice(i, 1);
             i--;
         }
