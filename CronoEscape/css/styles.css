@@ -814,7 +814,7 @@ nav.main-menu {
   content: url('../img/juego3/pc_sel.png'); 
 }
 
-.m.movil {
+.movil {
   width: 30% !important;
   height: 10% !important;
   margin-top: 320px;
@@ -822,7 +822,7 @@ nav.main-menu {
 }
 
 .movil:hover {
-  content: url('../img/juego3/HoloPhone_encendido.png'); 
+  content: url('../img/juego3/HoloPhone_Hover.png'); 
 }
 
 .qr {
