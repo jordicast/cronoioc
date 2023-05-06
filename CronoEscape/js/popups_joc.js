@@ -271,7 +271,7 @@ function httpRequest(url) {
 //PopUp Moneda
 var coinOK = false;
 function PopUpCoin() {
-  
+  if(radioOK==true){
   var div = document.querySelector(".PopUps");
   var text = `<div id="PopUp" style="display:block; position:fixed; top:0; left:0; width:100%; height:100%; background-color: transparent;">
   <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color:transparent; padding:10px;">
@@ -286,6 +286,7 @@ function PopUpCoin() {
   document.querySelector(".moneda").style.visibility = "hidden";
   coinOK = true;
   console.log("Moneda activada");
+}
 }
 
 //PopUp Ordinador
@@ -307,16 +308,14 @@ function PopUpPC2() {
 //PopUP RADIO
 var radioOK = false;
 function PopUpRadio() {
-  var div = document.querySelector(".PopUps");
-  var text = `<div id="PopUp" style="display:block; position:fixed; top:0; left:0; width:100%; height:100%; background-color: transparent;">
-  <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fff; padding:40px;">
-  <button class="btn " onclick="cerrarPopUpRadio()" id="tancar">X</button>
-  <img style="width:90%;"src="../img/juego2/radio.png">
-  <audio id="miAudio" src="../audio/money.mp3" autoplay></audio>
-  </div>
-</div>`;
-
-  div.innerHTML = text;
+  var audio = document.getElementById('musica');
+    if (audio.paused) {
+      // Si el audio está pausado, comienza a reproducirlo
+      audio.play();
+    } else {
+      // Si el audio se está reproduciendo, detenlo
+      audio.pause();
+    }
   radioOK = true;
   console.log("Radio activada");
 }
