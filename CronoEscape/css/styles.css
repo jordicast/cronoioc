@@ -799,6 +799,9 @@ nav.main-menu {
 .radio:hover {
   content: url('../img/juego2/radio_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
 }
+.pacman:hover {
+  content: url('../img/juego2/arcade_sel.png'); /* Cambia la ruta de la otra imagen según tu necesidad */
+}
 
 
 /* Imatges de joc3 ->joc2.html */
