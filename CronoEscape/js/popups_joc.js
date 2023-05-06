@@ -146,7 +146,7 @@ function comprovaResposta2() {
 
 
 //PopUp Movil
-var movilOK = false;
+var QrOK = false;
 function PopUpMovil() {
   var div = document.querySelector(".PopUps");
   var text = `<div id="PopUp" style="display:block; position:fixed; top:0; left:0; width:100%; height:100%; background-color: transparent;">
@@ -155,10 +155,30 @@ function PopUpMovil() {
     <img src="../img/juego3/qr-popup.png" width="50%" style="float: right;">
   </div>
 </div>`;
-  movilOK = true;
-  console.log("Movil actiu");
+  QrOK = true;
   div.innerHTML = text;
 }
+
+
+var movilOK = false;
+function OnPhone() {
+  var div = document.getElementById("qr");
+  var movil = document.querySelector(".movil");
+  var qrOpacidad = 0.7;
+ 
+  if (movilOK) {
+    movil.src = '../img/juego3/HoloPhone_apagado.png';
+    qrOpacidad = 0;
+    movilOK = false;
+  } else {
+    movil.src = '../img/juego3/HoloPhone_encendido.png';
+    movilOK = true;
+  }
+
+  div.style.opacity = qrOpacidad;
+}
+
+
 
 //PopUp Ordinador JOC3 Futur
 function PopUpPC3() {
