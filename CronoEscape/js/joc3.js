@@ -8,6 +8,7 @@ if (window.localStorage.getItem('id') == null) {
     window.location.href = "login.html";
 }
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyDp_QjlZP6cah2JBQLIXKSbfKtOIUfZ4Tw",
     authDomain: "cronoescape-ioc.firebaseapp.com",
@@ -92,11 +93,7 @@ function getCurrentUserData(auth) {
                         //convert the time in milliseconds to a string with the format hh:mm:ss
 
 
-
-
                         updateGame(game);
-
-
 
 
                         async function updateGame(game) {
@@ -106,16 +103,11 @@ function getCurrentUserData(auth) {
                             update(dbRef, game);
                             await new Promise(r => setTimeout(r, 1000));
 
-                            renderUserData(currentUser);
+                            renderUserData(currentUser, calculo);
                             await new Promise(r => setTimeout(r, 1000));
                             renderUserGames(currentUser);
+
                         }
-
-
-
-
-
-
                         return;
                     }
 
@@ -135,8 +127,17 @@ function getCurrentUserData(auth) {
 
 }
 
+
+
+
+let calculo;
+
 //ESTA FUNCION PINTA LOS DATOS DEL USUARIO EN EL PERFIL
-function renderUserData(currentUser) {
+function renderUserData(currentUser, calculo) {
+  //convertima  hores i minuts els milisegons
+    let tempsFinal = convertirMinuts(calculo);
+
+    document.getElementById("tempsTotal").innerHTML = tempsFinal;
 
     //Convertim nom usuari en majúscula
     document.getElementById("userName-container").innerHTML += ` ${currentUser.userName.toUpperCase()}`
@@ -145,6 +146,7 @@ function renderUserData(currentUser) {
     if (document.getElementById("games-played") == null) {
         return;
     }
+
 
     // Mostra el correu de l'usuari
     document.getElementById("userEmailText").innerHTML += ` ${currentUser.email}`;
@@ -376,16 +378,6 @@ function getCurrentDate() {
 }
 
 
-// Funció per calcular el temps empleat jugant accepta 2 parametres en milisegons startDate.getTime() i endDate.getTime().
-function tempsTotal(startDate, endDate) {
-    const calculTemps = endDate - startDate; // Diferència en milisegons.
-    const tempsSegons = calculTemps / 1000; // Convertim a segons.
-    const hores = Math.floor(tempsSegons / 3600); // Convertim a hores.
-    const minuts = Math.floor((tempsSegons - (hores * 3600)) / 60); // Convertim a minuts.
-    const segons = Math.floor(tempsSegons - (hores * 3600) - (minuts * 60)); // Convertim a segons.
-    //retorna un string amb el temps total en format "HH:MM:SS"
-    return `${hores}:${minuts}:${segons}`;
-}
 
 //function to given a date in miliseconds returns a string in format "HH:MM:SS" always with 2 digits
 function dateToString(date) {
@@ -407,26 +399,14 @@ function dateToString(date) {
     return `${hores}:${minuts}:${segons}`;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-// Funció per convertir de string "HH:MM:SS" a date en milisegons.
-function stringToDate(str) {
-    const [hores, minuts, segons] = str.split(':');
-    const date = new Date();
-    date.setHours(hores);
-    date.setMinutes(minuts);
-    date.setSeconds(segons);
-    return date;
+//Funcio que converteix milisegons a hores i minuts
+function convertirMinuts(milisegons) {
+    const hores = Math.floor(milisegons / (1000 * 60 * 60));
+    const minuts = Math.floor((milisegons % (1000 * 60 * 60)) / (1000 * 60));
+    return `${hores} hores i ${minuts} minuts`;
 }
+  
+  
 
 
 
@@ -444,11 +424,3 @@ if (botoRanking != null) {
 
     });
 }
-
-
-
-
-
-
-
-
